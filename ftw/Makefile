@@ -1,11 +1,11 @@
 NAME = ftw
 
-CC = gcc
+CC ?= gcc
 LIBS = -lfreetype
 CFLAGS += -std=c99 -pedantic -Wall
 CFLAGS += $(shell freetype-config --cflags)
 
-PREFIX = /usr/local
+PREFIX ?= /usr/local
 BINPREFIX = $(PREFIX)/bin
 
 BIN = $(NAME)
