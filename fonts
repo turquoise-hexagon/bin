@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+# refresh fonts
+
+mkfontdir "$HOME/.fonts"
+xset +fp "$HOME/.fonts"
+xset fp rehash

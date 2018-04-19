@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+# reload utils
+
+# fix directory issue
+cd "$HOME" || exit
+
+pk() {
+    pgrep -x "$1" > /dev/null &&
+        pkill -x "$1"
+}
+
+# bspwm
+pk bar
+pk sxhkd
+
+~/.config/bspwm/bspwmrc
+
+# dunst
+pk dunst
+
+dunst &

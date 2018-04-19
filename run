@@ -1,0 +1,11 @@
+#!/bin/sh
+# shellcheck disable=SC2034
+#
+# run a command x times
+
+x="$1"
+shift
+
+for i in $(seq 1 "$x"); do
+    "$@"
+done
