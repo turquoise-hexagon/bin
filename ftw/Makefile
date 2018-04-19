@@ -23,3 +23,5 @@ uninstall:
 
 clean:
 	rm -f $(BIN)
+
+.PHONY: install uninstall clean
