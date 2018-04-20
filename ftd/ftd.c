@@ -43,7 +43,10 @@ int main (int argc, char** argv)
         w = face->glyph->metrics.width;
 
         i++;
+
     }
+
+    FT_Done_Glyph (glyph);
 
     if (strncmp (argv[1], "-w", 2) == 0) printf ("%i\n", w/64);
     if (strncmp (argv[1], "-h", 2) == 0) printf ("%i\n", h/64);
