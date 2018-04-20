@@ -3,7 +3,7 @@
 # reload utils
 
 # fix directory issue
-cd "$HOME" || exit
+cd || exit
 
 pk() {
     pgrep -x "$1" > /dev/null &&
