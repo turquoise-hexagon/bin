@@ -43,7 +43,6 @@ int main (int argc, char** argv)
         w = face->glyph->metrics.width;
 
         i++;
-
     }
 
     FT_Done_Glyph (glyph);
