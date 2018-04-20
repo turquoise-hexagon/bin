@@ -15,11 +15,11 @@ $(BIN): $(SRC)
 	$(CC) $< -o $@ $(CFLAGS) $(LIBS)
 
 install:
-	mkdir -p "$(DESDIR)$(BINPREFIX)"
-	cp -f "$(BIN)" "$(DESTDIR)$(BINPREFIX)"
+	mkdir -p $(DESTDIR)$(BINPREFIX)/
+	cp -f $(BIN) $(DESTDIR)$(BINPREFIX)/
 
 uninstall:
-	rm -f "$(DESTDIR)$(BINPREFIX)/$(NAME)"
+	rm -f $(DESTDIR)$(BINPREFIX)/$(BIN)
 
 clean:
 	rm -f $(BIN)
