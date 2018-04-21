@@ -23,7 +23,7 @@ install:
 
 uninstall:
 	rm -f $(DESTDIR)$(BINPREFIX)/$(BIN)
-	rm -f $(DESTDIR)$(BINPREFIX)/man1/$(NAME).1
+	rm -f $(DESTDIR)$(MANPREFIX)/man1/$(NAME).1
 
 clean:
 	rm -f $(BIN)
