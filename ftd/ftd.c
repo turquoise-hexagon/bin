@@ -39,13 +39,13 @@ int main (int argc, char** argv)
         error = FT_Get_Glyph (face->glyph, &glyph);
         if (error) return 4;
 
-        h = face->glyph->metrics.height;
-        w = face->glyph->metrics.width;
+        h = face->glyph->metrics.vertAdvance;
+        w = face->glyph->metrics.horiAdvance;
 
         i++;
     }
 
-    FT_Done_Glyph (glyph);
+    FT_Done_FreeType (library);
 
     if (strncmp (argv[1], "-w", 2) == 0) printf ("%i\n", w/64);
     if (strncmp (argv[1], "-h", 2) == 0) printf ("%i\n", h/64);
