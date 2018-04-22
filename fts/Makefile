@@ -1,4 +1,4 @@
-NAME = ftd
+NAME = fts
 
 CC ?= gcc
 LIBS = -lfreetype
