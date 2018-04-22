@@ -7,7 +7,6 @@
 
 #include <ft2build.h>
 #include FT_FREETYPE_H
-#include FT_GLYPH_H
 
 void usage (char* name)
 {
@@ -20,7 +19,6 @@ int main (int argc, char** argv)
     if (argc != 3) usage (argv[0]);
 
     FT_Library library;
-    FT_Glyph glyph;
     FT_Error error;
     FT_Face face;
 
@@ -35,9 +33,6 @@ int main (int argc, char** argv)
     while (w == 0) {
         error = FT_Load_Glyph (face, i, FT_LOAD_DEFAULT);
         if (error) return 3;
-
-        error = FT_Get_Glyph (face->glyph, &glyph);
-        if (error) return 4;
 
         h = face->glyph->metrics.vertAdvance;
         w = face->glyph->metrics.horiAdvance;
