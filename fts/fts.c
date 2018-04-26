@@ -43,7 +43,7 @@ int main (int argc, char** argv)
     FT_Done_FreeType (library);
 
     if (strncmp (argv[1], "-w", 2) == 0) printf ("%i\n", w/64);
-    if (strncmp (argv[1], "-h", 2) == 0) printf ("%i\n", h/64);
+    else if (strncmp (argv[1], "-h", 2) == 0) printf ("%i\n", h/64);
 
     return 0;
 }
