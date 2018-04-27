@@ -2,8 +2,8 @@
 #
 # mount my sdcard
 
-mnt="/mnt/sdcard"
-dev="/dev/mmcblk0p1"
+mnt=/mnt/sdcard
+dev=/dev/mmcblk0p1
 
 check() {
     [ ! -e "$1" ] &&
