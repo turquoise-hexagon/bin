@@ -1,0 +1,5 @@
+#!/bin/sh
+#
+# print unicode char
+
+env printf "%b" "\ue$1"
