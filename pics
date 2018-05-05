@@ -13,7 +13,7 @@ while [[ $# -gt 0 ]]; do
 
     ext=${1##*.}
 
-    mv "$var.$ext" "$1"
+    mv "$1" "$var.$ext"
 
     shift
 done
