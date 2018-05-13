@@ -5,7 +5,8 @@
 mnt=/mnt/sdcard
 dev=/dev/mmcblk0p1
 
-check () {
+check ()
+{
     [ ! -e "$1" ] &&
         { echo "error : '$1' not found"; exit 1; }
 }
