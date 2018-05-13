@@ -6,7 +6,7 @@ while [[ $# -gt 0 ]]; do
     var=$(exif -m -t DateTime "$1")
 
     # exit if var is empty
-    [[ ! $var ]] && exit 1
+    [[ $var ]] || exit 1
 
     var=${var//:/-}
     var=${var// /_}
