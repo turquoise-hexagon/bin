@@ -1,0 +1,27 @@
+#!/bin/sh
+#
+# pretty cmus status
+
+# colors
+a=$(tput setaf 11)
+t=$(tput sgr0)
+
+var=$(cmus-remote -Q)
+
+# query function
+query ()
+{
+    echo "$var" | grep "$1" | cut -d\  -f3-
+}
+
+album=$(query album)
+title=$(query title)
+artist=$(query artist)
+
+cat << EOF
+
+${a}Album${t}:    ${album}
+${a}Artist${t}:   ${artist}
+${a}Title${t}:    ${title}
+
+EOF
