@@ -11,6 +11,7 @@ MANPREFIX = $(PREFIX)/man
 
 BIN = $(NAME)
 SRC = $(NAME).c
+MAN = $(NAME).1
 
 $(BIN): $(SRC)
 	$(CC) $< -o $@ $(CFLAGS) $(LIBS)
@@ -19,11 +20,11 @@ install:
 	mkdir -p $(DESTDIR)$(BINPREFIX)/
 	cp -f $(BIN) $(DESTDIR)$(BINPREFIX)/
 	mkdir -p $(DESTDIR)$(MANPREFIX)/man1/
-	cp -f $(NAME).1 $(DESTDIR)$(MANPREFIX)/man1/
+	cp -f $(MAN) $(DESTDIR)$(MANPREFIX)/man1/
 
 uninstall:
 	rm -f $(DESTDIR)$(BINPREFIX)/$(BIN)
-	rm -f $(DESTDIR)$(MANPREFIX)/man1/$(NAME).1
+	rm -f $(DESTDIR)$(MANPREFIX)/man1/$(MAN)
 
 clean:
 	rm -f $(BIN)
