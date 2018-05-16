@@ -17,21 +17,17 @@ int main (int argc, char** argv)
 {
     if (argc != 2) usage (argv[0]);
 
-    FcChar8* file = NULL;
-    FcConfig* config;
-    FcPattern* pattern;
-    FcPattern* font;
-    FcResult result;
-
-    config = FcInitLoadConfigAndFonts ();
+    FcConfig* config = FcInitLoadConfigAndFonts ();
     if (! config) return 1;
 
-    pattern = XftXlfdParse (argv[1], FcFalse, FcFalse);
+    FcPattern* pattern = XftXlfdParse (argv[1], FcFalse, FcFalse);
     if (! pattern) return 2;
 
-    font = FcFontMatch (config, pattern, &result);
+    FcResult result;
+    FcPattern* font = FcFontMatch (config, pattern, &result);
     if (! font) return 3;
 
+    FcChar8* file = NULL;
     if (FcPatternGetString (font, FC_FILE, 0, &file) == FcResultMatch)
         printf ("%s\n", file);
 

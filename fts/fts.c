@@ -19,12 +19,10 @@ int main (int argc, char** argv)
     if (argc != 3) usage (argv[0]);
 
     FT_Library library;
-    FT_Error error;
-    FT_Face face;
-
-    error = FT_Init_FreeType (&library);
+    FT_Error error = FT_Init_FreeType (&library);
     if (error) return 1;
 
+    FT_Face face;
     error = FT_New_Face (library, argv[2], 0, &face);
     if (error) return 2;
 
