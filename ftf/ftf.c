@@ -34,7 +34,7 @@ int main (int argc, char** argv)
     FcPatternDestroy (font);
     FcPatternDestroy (pattern);
     FcConfigDestroy (config);
-    FcFini();
+    FcFini ();
 
     return 0;
 }
