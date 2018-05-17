@@ -1,5 +1,5 @@
 /*
- * depends on : xft, freetype
+ * depends on : xft, fontconfig
  * argument : xfld name
  * returns : font path
  */
