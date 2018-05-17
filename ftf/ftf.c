@@ -5,7 +5,6 @@
  */
 
 #include <X11/Xft/Xft.h>
-#include <fontconfig/fontconfig.h>
 
 void usage (char* name)
 {
