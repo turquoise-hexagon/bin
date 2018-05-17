@@ -11,7 +11,7 @@ var=$(cmus-remote -Q)
 # query function
 query ()
 {
-    echo "$var" | grep "$1" | cut -d\  -f3-
+    echo "$var" | grep " $1 " | cut -d\  -f3-
 }
 
 album=$(query album)
