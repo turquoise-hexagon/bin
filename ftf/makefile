@@ -20,7 +20,7 @@ install:
 	mkdir -p $(DESTDIR)$(BINPREFIX)/
 	cp -f $(BIN) $(DESTDIR)$(BINPREFIX)/
 	mkdir -p $(DESTDIR)$(MANPREFIX)/man1/
-	cp -r $(MAN) $(DESTDIR)$(MANPREFIX)/man1/$(MAN)
+	cp -f $(MAN) $(DESTDIR)$(MANPREFIX)/man1/$(MAN)
 
 uninstall:
 	rm -f $(DESTDIR)$(BINPREFIX)/$(BIN)
