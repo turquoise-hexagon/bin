@@ -1,7 +1,7 @@
-#!/usr/bin/env bash
+#!/bin/sh
 #
 # produce pcf files
 
 for file in *.bdf; do
-    bdftopcf -o "${file/.bdf/.pcf}" "$file"
+    bdftopcf -o "${file%\.*}.pcf" "$file"
 done

@@ -15,5 +15,5 @@ if [ -f "$1" ]; then
         *)          echo "'$1' cannot be extracted via extract."
     esac
 else
-    echo "'$1' is not a valid file"
+    echo "usage : extract [file]"
 fi
