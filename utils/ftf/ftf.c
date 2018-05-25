@@ -17,6 +17,8 @@ int main (int argc, char** argv)
 {
     if (argc != 2) usage (argv[0]);
 
+    FcResult result;
+
     FcConfig* config = FcInitLoadConfigAndFonts ();
     if (! config)
         errx (1, "failed to initialiaze fontconfig");
@@ -25,7 +27,6 @@ int main (int argc, char** argv)
     if (! pattern)
         errx (1, "failed to parse pattern");
 
-    FcResult result;
     FcPattern* font = FcFontMatch (config, pattern, &result);
     if (! font)
         errx (1, "failed to open font");

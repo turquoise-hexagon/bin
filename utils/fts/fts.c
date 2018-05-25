@@ -27,13 +27,14 @@ int main (int argc, char** argv)
     FT_Face face;
     error = FT_New_Face (library, argv[2], 0, &face);
     if (error)
-        errx (2, "failed to open font face");
+        errx (1, "failed to open font face");
 
     int w = 0, h = 0, i = 0;
 
     while (w == 0) {
         error = FT_Load_Glyph (face, i, FT_LOAD_DEFAULT);
-        if (error) return 3;
+        if (error)
+            errx (1, "failed to load glyph");
 
         h = face->glyph->metrics.vertAdvance;
         w = face->glyph->metrics.horiAdvance;
