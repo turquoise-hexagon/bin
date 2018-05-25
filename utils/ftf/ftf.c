@@ -17,20 +17,22 @@ int main (int argc, char** argv)
     if (argc != 2) usage (argv[0]);
 
     FcConfig* config = FcInitLoadConfigAndFonts ();
-    if (! config) return 1;
+    if (! config)
+        errx (1, "failed to initialiaze fontconfig");
 
     FcPattern* pattern = XftXlfdParse (argv[1], FcFalse, FcFalse);
-    if (! pattern) return 2;
+    if (! pattern)
+        errx (1, "failed to parse pattern");
 
     FcResult result;
     FcPattern* font = FcFontMatch (config, pattern, &result);
-    if (! font) return 3;
+    if (! font)
+        errx (1, "failed to open font");
 
     FcChar8* file = NULL;
     if (FcPatternGetString (font, FC_FILE, 0, &file) == FcResultMatch)
         printf ("%s\n", file);
 
-    /* cleanup */
     FcPatternDestroy (font);
     FcPatternDestroy (pattern);
     FcConfigDestroy (config);

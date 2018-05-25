@@ -5,6 +5,7 @@
  * returns : size in pixels
  */
 
+#include <err.h>
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
@@ -20,11 +21,13 @@ int main (int argc, char** argv)
 
     FT_Library library;
     FT_Error error = FT_Init_FreeType (&library);
-    if (error) return 1;
+    if (error)
+        errx (1, "failed to initialize freetype");
 
     FT_Face face;
     error = FT_New_Face (library, argv[2], 0, &face);
-    if (error) return 2;
+    if (error)
+        errx (2, "failed to open font face");
 
     int w = 0, h = 0, i = 0;
 

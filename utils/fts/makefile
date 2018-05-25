@@ -7,11 +7,9 @@ CFLAGS += $(shell freetype-config --cflags)
 
 PREFIX ?= /usr/local
 BINPREFIX = $(PREFIX)/bin
-MANPREFIX = $(PREFIX)/man
 
 BIN = $(NAME)
 SRC = $(NAME).c
-MAN = $(NAME).1
 
 $(BIN): $(SRC)
 	$(CC) $< -o $@ $(CFLAGS) $(LIBS)
@@ -19,12 +17,9 @@ $(BIN): $(SRC)
 install:
 	mkdir -p $(DESTDIR)$(BINPREFIX)/
 	cp -f $(BIN) $(DESTDIR)$(BINPREFIX)/
-	mkdir -p $(DESTDIR)$(MANPREFIX)/man1/
-	cp -f $(MAN) $(DESTDIR)$(MANPREFIX)/man1/
 
 uninstall:
 	rm -f $(DESTDIR)$(BINPREFIX)/$(BIN)
-	rm -f $(DESTDIR)$(MANPREFIX)/man1/$(MAN)
 
 clean:
 	rm -f $(BIN)
