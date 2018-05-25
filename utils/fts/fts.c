@@ -1,10 +1,3 @@
-/*
- * depends on : freetype
- * options : width / height
- * argument : path to a bitmap font
- * returns : size in pixels
- */
-
 #include <err.h>
 #include <ft2build.h>
 #include FT_FREETYPE_H

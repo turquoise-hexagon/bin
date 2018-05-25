@@ -1,9 +1,3 @@
-/*
- * depends on : xft, fontconfig
- * argument : xfld name
- * returns : font path
- */
-
 #include <err.h>
 #include <X11/Xft/Xft.h>
 
