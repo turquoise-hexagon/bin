@@ -4,6 +4,7 @@
  * returns : font path
  */
 
+#include <err.h>
 #include <X11/Xft/Xft.h>
 
 void usage (char* name)
