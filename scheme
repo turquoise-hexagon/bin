@@ -1,5 +1,5 @@
 #!/bin/sh
 #
-# scheme script
+# scheme shebang
 
 csi -s "$@"
