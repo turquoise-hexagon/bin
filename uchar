@@ -1,5 +1,5 @@
-#!/bin/sh
+#!/usr/bin/env bash
 #
 # print unicode char
 
-env printf "%b" "\u$1"
+printf "%b" "\u$1"
