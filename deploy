@@ -2,9 +2,6 @@
 #
 # deploy dots
 
-command -v stow > /dev/null ||
-    { echo "error : install stow first"; exit 1; }
-
 for i in bin .config .icons .vim .xres; do
     mkdir -p ~/"$i"
 done
