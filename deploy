@@ -2,6 +2,9 @@
 #
 # deploy dots
 
+git clone https://github.com/marinhoc/dots ~/dots &&
+    cd ~/dots
+
 for i in bin .config .icons .vim .xres; do
     mkdir -p ~/"$i"
 done
