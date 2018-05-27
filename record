@@ -5,10 +5,10 @@
 dir=~/pics/records
 var=$(date +%F_%H-%M-%S)
 
+mkdir -p "$dir"
+
 x=$(bspc query -T -m | jq .rectangle.width)
 y=$(bspc query -T -m | jq .rectangle.height)
-
-mkdir -p "$dir" || exit 1
 
 ffmpeg -loglevel 16 \
     -s "${x}x${y}" \
