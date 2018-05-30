@@ -12,8 +12,7 @@ FT_Library library;
 FT_Error error;
 FT_Face face;
 
-int w = 0;
-int h = 0;
+int w = 0, h = 0;
 
 void usage (char* name)
 {
@@ -61,8 +60,8 @@ void get_size (char* string)
     /* iterate until we get a valid glyph */
     while (w == 0) {
         error = FT_Load_Glyph (face, i, FT_LOAD_DEFAULT);
-        if (error) errx
-            (2, "failed to load glyph");
+        if (error)
+            errx (2, "failed to load glyph");
 
         w = face -> glyph -> metrics.horiAdvance;
         h = face -> glyph -> metrics.vertAdvance;
