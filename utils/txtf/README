@@ -1,0 +1,5 @@
+usage :
+txtf [xfld] [text]
+
+returns :
+width and height
