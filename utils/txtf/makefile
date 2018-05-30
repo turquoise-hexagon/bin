@@ -17,10 +17,10 @@ $(BIN): $(SRC)
 
 install:
 	mkdir -p $(DESTDIR)$(BINPREFIX)
-	cp -r $(BIN) $(DESTDIR)$(BINPREFIX)/
+	cp -r $(BIN) $(DESTDIR)$(BINPREFIX)
 
 uninstall:
-	rm -f $(DESTDIR)$(BINPREFIX)
+	rm -f $(DESTDIR)$(BINPREFIX)/$(BIN)
 
 clean:
 	rm -f $(BIN)
