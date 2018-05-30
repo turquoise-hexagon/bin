@@ -34,9 +34,9 @@ void init_freetype ()
         errx (2, "failed to initialize freetype library");
 }
 
-void get_file (char* xfld)
+void get_file (char* xlfd)
 {
-    pattern = XftXlfdParse (xfld, FcFalse, FcFalse);
+    pattern = XftXlfdParse (xlfd, FcFalse, FcFalse);
     if (! config)
         errx (1, "failed to parse xlfd pattern");
 

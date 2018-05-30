@@ -1,5 +1,5 @@
 usage :
-txtf [xfld] [text]
+txtf [xlfd] [text]
 
 returns :
 width and height
