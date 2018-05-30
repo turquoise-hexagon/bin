@@ -58,7 +58,7 @@ void get_size (char* string)
 
     int i = 0, l = strlen (string);
 
-    // iterate until we get a valid glyph
+    /* iterate until we get a valid glyph */
     while (w == 0) {
         error = FT_Load_Glyph (face, i, FT_LOAD_DEFAULT);
         if (error) errx
@@ -70,6 +70,7 @@ void get_size (char* string)
         i++;
     }
 
+    /* get the right values */
     w = w / 64 * l;
     h = h / 64;
 }
