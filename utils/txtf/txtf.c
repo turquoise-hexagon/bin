@@ -10,9 +10,11 @@ FcResult result;
 
 FT_Library library;
 FT_Error error;
+FT_UInt index;
 FT_Face face;
 
-int w = 0, h = 0;
+int w;
+int h;
 
 void usage (char* name)
 {
@@ -23,68 +25,52 @@ void usage (char* name)
 void init_fontconfig ()
 {
     config = FcInitLoadConfigAndFonts ();
-    if (! config)
-        errx (1, "failed to initialize fontconfig");
+    if (! config) errx (1, "failed to initialize fontconfig");
 }
 
 void init_freetype ()
 {
     error = FT_Init_FreeType (&library);
-    if (error)
-        errx (2, "failed to initialize freetype library");
+    if (error) errx (2, "failed to initialize freetype library");
 }
 
 void get_file (char* xlfd)
 {
     pattern = XftXlfdParse (xlfd, FcFalse, FcFalse);
-    if (! config)
-        errx (1, "failed to parse xlfd pattern");
+    if (! config) errx (1, "failed to parse xlfd pattern");
 
     font = FcFontMatch (config, pattern, &result);
-    if (! font)
-        errx (1, "failed to match font");
+    if (! font) errx (1, "failed to match font");
 
     FcPatternGetString (font, FC_FILE, 0, &file);
-    if (! file)
-        errx (1, "failed to get font file");
+    if (! file) errx (1, "failed to get font file");
 }
 
 void get_size (char* string)
 {
     error = FT_New_Face (library, ((const char*) file), 0, &face);
-    if (error)
-        errx (2, "failed to open font face");
+    if (error) errx (2, "failed to open font face");
 
-    int i = 0, l = strlen (string);
+    for (int i = 0; string [i] != '\0'; i++)
+    {
+        index = FT_Get_Char_Index (face, string [i]);
 
-    /* iterate until we get a valid glyph */
-    while (w == 0) {
-        error = FT_Load_Glyph (face, i, FT_LOAD_DEFAULT);
-        if (error)
-            errx (2, "failed to load glyph");
+        error = FT_Load_Glyph (face, index, FT_LOAD_DEFAULT);
+        if (error) errx (2, "failed to load glyph");
 
-        w = face -> glyph -> metrics.horiAdvance;
-        h = face -> glyph -> metrics.vertAdvance;
-
-        i++;
+        w = w + face -> glyph -> metrics.horiAdvance / 64;
     }
 
-    /* get the right values */
-    w = w / 64 * l;
-    h = h / 64;
+    h = face -> glyph -> metrics.vertAdvance / 64;
 }
 
 void cleanup ()
 {
-    /* freetype */
     FT_Done_FreeType (library);
 
-    /* fontconfig */
     FcPatternDestroy (font);
     FcPatternDestroy (pattern);
-
     FcConfigDestroy (config);
-
     FcFini ();
 }
 
