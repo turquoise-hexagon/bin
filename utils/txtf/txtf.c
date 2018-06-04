@@ -18,7 +18,7 @@ int h;
 
 void usage (char* name)
 {
-    printf ("usage : %s [xlfd] [text]\n", name);
+    printf ("usage : %s [name] [text]\n", name);
     exit (1);
 }
 
@@ -34,10 +34,10 @@ void init_freetype ()
     if (error) errx (2, "failed to initialize freetype library");
 }
 
-void get_file (char* xlfd)
+void get_file (char* name)
 {
-    pattern = XftXlfdParse (xlfd, FcFalse, FcFalse);
-    if (! config) errx (1, "failed to parse xlfd pattern");
+    pattern = XftXlfdParse (name, FcFalse, FcFalse);
+    if (! pattern) errx (1, "failed to parse pattern");
 
     font = FcFontMatch (config, pattern, &result);
     if (! font) errx (1, "failed to match font");
