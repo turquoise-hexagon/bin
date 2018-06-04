@@ -18,7 +18,7 @@ int h;
 
 void usage (char* name)
 {
-    printf ("usage : %s [name] [text]\n", name);
+    printf ("usage : %s [xlfd] [text]\n", name);
     exit (1);
 }
 
