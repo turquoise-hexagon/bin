@@ -3,7 +3,7 @@
 # record with ffmpeg
 
 dir=~/pics/records
-var=$(date +%F_%H-%M-%S)
+cur=$(date +%F_%H-%M-%S)
 
 mkdir -p "$dir"
 
@@ -18,4 +18,4 @@ ffmpeg -loglevel 16 \
     -r 30 \
     -f x11grab \
     -i :0.0 \
-    "$dir/$var.mp4"
+    "$dir/$cur.mp4"
