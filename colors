@@ -3,7 +3,7 @@
 # display colorscheme
 
 f=3
-b=4
+b=9
 
 for i in f b; do
     for j in {0..7}; do
@@ -11,12 +11,10 @@ for i in f b; do
     done
 done
 
-b=$'\e[1m'
-
 # output
 cat << EOF
 
 $f1██  $f2██  $f3██  $f4██  $f5██  $f6██  $f7██  $f8
-$b$f1██  $f2██  $f3██  $f4██  $f5██  $f6██  $f7██  $f8
+$b1██  $b2██  $b3██  $b4██  $b5██  $b6██  $b7██  $b8
 
 EOF

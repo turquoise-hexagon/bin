@@ -1,27 +1,19 @@
-#!/bin/sh
+#!/usr/bin/env bash
 #
 # pretty cmus status
 
 # colors
-a=$(tput setaf 11)
-t=$(tput sgr0)
+a=$'\e[93m'
+t=$'\e[00m'
 
 var=$(cmus-remote -Q)
 
-# query function
-query ()
-{
-    echo "$var" | grep " $1 " | cut -d\  -f3-
-}
-
-album=$(query album)
-title=$(query title)
-artist=$(query artist)
+query () { echo "$var" | grep " $1 " | cut -d\  -f3-; }
 
 cat << EOF
 
-${a}Album${t}:    ${album}
-${a}Artist${t}:   ${artist}
-${a}Title${t}:    ${title}
+${a}Album${t}:    $(query album)
+${a}Artist${t}:   $(query album)
+${a}Title${t}:    $(query artist)
 
 EOF
