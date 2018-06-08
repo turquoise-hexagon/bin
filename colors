@@ -8,7 +8,7 @@ b=9
 # store escape sequences
 for i in f b; do
     for j in {0..7}; do
-        printf -v "$i$j" "%b" "\e[${!i}${j}m"
+        printf -v "$i$j" "%b" "\\e[${!i}${j}m"
     done
 done
 
