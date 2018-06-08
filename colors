@@ -5,13 +5,13 @@
 f=3
 b=9
 
+# store escape sequences
 for i in f b; do
     for j in {0..7}; do
         printf -v "$i$j" "%b" "\e[${!i}${j}m"
     done
 done
 
-# output
 cat << EOF
 
 $f1██  $f2██  $f3██  $f4██  $f5██  $f6██  $f7██  $f8
