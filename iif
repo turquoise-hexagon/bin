@@ -2,4 +2,4 @@
 #
 # inline if
 
-eval "$1" > /dev/null && echo "${2-true}" || echo "${3-true}"
+eval "$1" > /dev/null && echo "${2-true}" || echo "${3-false}"
