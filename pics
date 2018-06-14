@@ -8,9 +8,8 @@ while [[ $# -gt 0 ]]; do
     # exit if var is empty
     [[ $var ]] || exit 1
 
-    ext=${1##*.}
-
     # format datas
+    ext=${1##*.}
     var=${var//:/-}
     var=${var// /_}
 
