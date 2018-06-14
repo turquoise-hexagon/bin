@@ -2,19 +2,11 @@
 #
 # display colorscheme
 
-f=3
-b=9
-
-# store escape sequences
-for i in f b; do
-    for j in {0..7}; do
-        printf -v "$i$j" "%b" "\\e[${!i}${j}m"
+echo
+for a in 4 10; do
+    for i in {0..7}; do
+        echo -en "\\e[${a}${i}m  \\e[0m  "
     done
+    echo
 done
-
-cat << EOF
-
-$f1██  $f2██  $f3██  $f4██  $f5██  $f6██  $f7██  $f8
-$b1██  $b2██  $b3██  $b4██  $b5██  $b6██  $b7██  $b8
-
-EOF
+echo
