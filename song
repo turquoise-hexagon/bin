@@ -6,7 +6,7 @@
 a=$'\e[93m'
 t=$'\e[00m'
 
-query ()
+_ ()
 {
     echo "$var" | grep " $1 " | cut -d\  -f3-
 }
@@ -15,8 +15,8 @@ var=$(cmus-remote -Q)
 
 cat << EOF
 
-${a}Album${t}:    $(query album)
-${a}Artist${t}:   $(query artist)
-${a}Title${t}:    $(query title)
+${a}Album${t}:    $(_ album)
+${a}Artist${t}:   $(_ artist)
+${a}Title${t}:    $(_ title)
 
 EOF
