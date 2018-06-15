@@ -1,10 +1,10 @@
-#!/bin/sh
+#!/usr/bin/env bash
 #
 # run a command x times
 
 x="$1"
 shift
 
-for i in $(seq 1 "$x"); do
+for ((i=0;i<x;i++)); do
     "$@"
 done
