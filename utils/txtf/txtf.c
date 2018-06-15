@@ -58,7 +58,7 @@ void get_size (char* string)
         error = FT_Load_Glyph (face, index, FT_LOAD_DEFAULT);
         if (error) errx (2, "failed to load glyph");
 
-        w = w + face -> glyph -> metrics.horiAdvance / 64;
+        w += face -> glyph -> metrics.horiAdvance / 64;
     }
 
     h = face -> glyph -> metrics.vertAdvance / 64;
