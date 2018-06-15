@@ -5,6 +5,6 @@
 x="$1"
 shift
 
-for ((i=0;i<x;i++)); do
+for ((i=0; i<x; i++)); do
     "$@"
 done
