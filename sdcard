@@ -6,7 +6,7 @@ mnt=/mnt/sdcard
 dev=/dev/mmcblk0p1
 
 _ ()
-    if ! [ -e "$1" ]; then
+    if [ ! -e "$1" ]; then
         echo "error : '$1' not found"
         exit 1
     fi
