@@ -2,4 +2,4 @@
 #
 # scheme shebang
 
-csi -s "$@"
+scheme --script "$@"
