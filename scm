@@ -2,4 +2,4 @@
 #
 # scheme shebang
 
-scheme --script "$@"
+petite --script "$@"
