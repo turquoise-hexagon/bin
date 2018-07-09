@@ -1,7 +1,0 @@
-#!/bin/sh
-#
-# map
-
-while read -r x; do
-    "$@" "$x"
-done

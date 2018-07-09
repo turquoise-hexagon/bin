@@ -1,7 +1,0 @@
-#!/bin/sh
-#
-# produce pcf files
-
-for file in *.bdf; do
-    bdftopcf -o "${file%\.*}.pcf" "$file"
-done
