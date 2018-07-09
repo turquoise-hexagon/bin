@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+#
+# pretty cmus status
+
+# colors
+a=$'\e[93m'
+t=$'\e[00m'
+
+_ ()
+{
+    echo "$var" | grep " $1 " | cut -d\  -f3-
+}
+
+var=$(cmus-remote -Q)
+
+cat << EOF
+
+${a}Album${t}:    $(_ album)
+${a}Artist${t}:   $(_ artist)
+${a}Title${t}:    $(_ title)
+
+EOF

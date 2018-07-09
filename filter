@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+# filter
+
+while read -r x; do
+    "$@" "$x" && echo "$x"
+done

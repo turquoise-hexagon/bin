@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#
+# print unicode char
+
+printf "%b" "\\u$1"

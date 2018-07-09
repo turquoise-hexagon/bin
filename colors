@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+#
+# display colorscheme
+
+echo
+for a in 4 10; do
+    for i in {0..7}; do
+        echo -en "\\e[${a}${i}m  \\e[0m "
+    done
+    echo
+done
+echo

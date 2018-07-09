@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# record with ffmpeg
+
+dir=~/pics/records
+cur=$(date +%F_%H-%M-%S)
+
+mkdir -p "$dir"
+
+# get screen resolution
+x=$(bspc query -T -m | jq .rectangle.width)
+y=$(bspc query -T -m | jq .rectangle.height)
+
+ffmpeg -loglevel 16 \
+    -s "${x}x${y}" \
+    -r 30 \
+    -f x11grab \
+    -i :0.0 \
+    "$dir/$cur.mp4"
