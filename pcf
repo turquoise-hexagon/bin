@@ -1,7 +1,7 @@
 #!/bin/sh
 #
-# produce pcf files
+# bdf -> pcf
 
-for file in *.bdf; do
-    bdftopcf -o "${file%\.*}.pcf" "$file"
+for font in *.bdf; do
+    bdftopcf "$font" > "${font%\.*}.pcf"
 done
