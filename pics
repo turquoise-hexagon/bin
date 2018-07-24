@@ -3,10 +3,10 @@
 # rename pictures based on exifs
 
 while [[ $# -gt 0 ]]; do
-    var=$(exif -m -t DateTime "$1")
+    var=$(exif -mt DateTime "$1")
 
     # exit if var is empty
-    test "$var" || exit 1
+    [[ $var ]] || exit 1
 
     # format datas
     ext=${1##*.}
