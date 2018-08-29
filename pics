@@ -14,6 +14,7 @@ while [[ $# -gt 0 ]]; do
     var=${var// /_}
 
     mv "$1" "$var.$ext"
+    echo "$1 -> $var.$ext"
 
     shift
 done
