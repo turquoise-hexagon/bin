@@ -8,7 +8,7 @@ temp=/tmp/todo
 
 cpt=1
 
-add ()
+pri ()
 {
     while read -r line; do
         echo "$((cpt++)) -> $line"
@@ -31,8 +31,8 @@ case $1 in
         echo "$2" >> $todo
         ;;
     del)
-        rp "$2"
+        del "$2"
         ;;
     *)
-        nb
+        pri
 esac
