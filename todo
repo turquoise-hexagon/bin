@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+#
+# todo script
+
+# files
+todo=~/.todo
+temp=/tmp/todo
+
+cpt=1
+
+nb ()
+{
+    while read -r line; do
+        echo "$((cpt++)) -> $line"
+    done < $todo
+}
+
+rp ()
+{
+    > $temp || exit 1
+
+    while read -r line; do
+        (($1 != cpt++)) && echo "$line" >> $temp
+    done < $todo
+
+    mv "$temp" "$todo"
+}
+
+case $1 in
+    add)
+        shift
+        echo "$@" >> $todo
+        ;;
+    rm)
+        shift
+        rp "$@"
+        ;;
+    *)
+        nb
+        ;;
+esac
