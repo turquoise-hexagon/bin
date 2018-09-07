@@ -2,19 +2,17 @@
 #
 # rename pictures based on exifs
 
-while [[ $# -gt 0 ]]; do
-    var=$(exif -mt DateTime "$1")
+for file in "$@"; do
+    var=$(exif -mt DateTime "$file")
 
-    # exit if var is empty
-    [[ $var ]] || exit 1
+    # exit if there is no date
+    test "$var" || exit 1
 
     # format datas
     ext=${1##*.}
     var=${var//:/-}
     var=${var// /_}
 
-    mv "$1" "$var.$ext"
-    echo "$1 -> $var.$ext"
-
-    shift
+    mv   "$file"  "$var.$ext"
+    echo "$file -> $var.$ext"
 done
