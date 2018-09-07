@@ -25,38 +25,38 @@ void usage (char* name)
 void init_fontconfig ()
 {
     config = FcInitLoadConfigAndFonts ();
-    if (! config) exit (1)
+    if (! config) exit (1);
 }
 
 void init_freetype ()
 {
     error = FT_Init_FreeType (&library);
-    if (error) exit (1)
+    if (error) exit (1);
 }
 
 void get_file (char* name)
 {
     pattern = XftXlfdParse (name, FcFalse, FcFalse);
-    if (! pattern) exit (1)
+    if (! pattern) exit (1);
 
     font = FcFontMatch (config, pattern, &result);
-    if (! font) exit (1)
+    if (! font) exit (1);
 
     FcPatternGetString (font, FC_FILE, 0, &file);
-    if (! file) exit (1)
+    if (! file) exit (1);
 }
 
 void get_size (char* string)
 {
     error = FT_New_Face (library, ((const char*) file), 0, &face);
-    if (error) exit (1)
+    if (error) exit (1);
 
     for (int i = 0; string [i] != '\0'; i++)
     {
         index = FT_Get_Char_Index (face, string [i]);
 
         error = FT_Load_Glyph (face, index, FT_LOAD_DEFAULT);
-        if (error) exit (1)
+        if (error) exit (1);
 
         w += face -> glyph -> metrics.horiAdvance / 64;
     }
