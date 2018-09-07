@@ -4,7 +4,7 @@
 
 _ ()
 {
-    var=`exif -mt DateTime "$1"`
+    var=$(exif -mt DateTime "$1")
 
     # exit if there is no date
     test "$var" || exit 1
