@@ -4,32 +4,19 @@
 
 clear
 
-# get terminal size
-shopt -s checkwinsize
+# get lines and columns
+shopt -s checkwinsize; (:;:)
 
-(:;:)
+while read -r a; do
+    ((nb++))
+done < "$1"
 
 # center vertically
-nb=$(wc -l < "$1")
-
-nb=$(((LINES - nb) / 2))
-
-for ((; i++ < nb;))
-{
+for ((; i++ < (LINES - nb) / 2;)) do
     echo
-}
+done
 
 # center horizontally
-while read -r line; do
-    out=
-    nb=${#line}
-
-    nb=$(((COLUMNS - nb) / 2))
-
-    for ((i = 0; i++ < nb;))
-    {
-        out="$out "
-    }
-
-    echo "$out$line"
+while read -r a; do
+    printf "%*s\\n" "$(((${#a} + COLUMNS) / 2))" "$a"
 done < "$1"
