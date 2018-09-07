@@ -8,14 +8,14 @@ temp=/tmp/todo
 
 cpt=1
 
-nb ()
+add ()
 {
     while read -r line; do
         echo "$((cpt++)) -> $line"
     done < $todo
 }
 
-rp ()
+del ()
 {
     > $temp || exit 1
 
@@ -28,14 +28,11 @@ rp ()
 
 case $1 in
     add)
-        shift
-        echo "$@" >> $todo
+        echo "$2" >> $todo
         ;;
-    rm)
-        shift
-        rp "$@"
+    del)
+        rp "$2"
         ;;
     *)
         nb
-        ;;
 esac

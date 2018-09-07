@@ -2,17 +2,20 @@
 #
 # rename pictures based on exifs
 
-for file in "$@"; do
-    var=$(exif -mt DateTime "$file")
+_ ()
+{
+    var=`exif -mt DateTime "$1"`
 
     # exit if there is no date
     test "$var" || exit 1
 
-    # format datas
+    # format date
     ext=${1##*.}
     var=${var//:/-}
     var=${var// /_}
 
-    mv   "$file"  "$var.$ext"
-    echo "$file -> $var.$ext"
-done
+    mv   "$1"  "$var.$ext"
+    echo "$1 -> $var.$ext"
+}
+
+for file in "$@"; { _ "$file"; }
