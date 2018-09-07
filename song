@@ -2,11 +2,11 @@
 #
 # pretty mpc status
 
+_ () { mpc current -f "%$1%"; }
+
 # colors
 a=$'\e[93m'
 t=$'\e[00m'
-
-_ () mpc current -f "%$1%"
 
 cat << EOF
 
