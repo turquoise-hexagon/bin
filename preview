@@ -18,5 +18,5 @@ done
 
 # center horizontally
 while read -r a; do
-    printf "%*s\\n" "$(((${#a} + COLUMNS) / 2))" "$a"
+    printf '%*s\n' "$(((${#a} + COLUMNS) / 2))" "$a"
 done < "$1"
