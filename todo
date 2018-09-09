@@ -15,7 +15,7 @@ del ()
     done < $todo
 
 case $1 in
-    add) echo       "$2"  >> $todo;;
-    del) echo "`del "$2"`" > $todo;;
+    add) echo       "$2" >> $todo;;
+    del) echo "$(del $2)" > $todo;;
     *) pri
 esac
