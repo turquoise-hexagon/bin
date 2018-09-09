@@ -7,13 +7,20 @@ cur=$(date +%F_%H-%M-%S)
 
 mkdir -p "$dir"
 
-# get screen resolution
-x=$(bspc query -T -m | jq .rectangle.width)
-y=$(bspc query -T -m | jq .rectangle.height)
+# get monitor resolution
+bspc query -T -m | jq -r '
+    [
+         .rectangle.width
+        ,.rectangle.height
+    ] |
+    @sh' |
+    {
+        read -r x y
 
-ffmpeg -loglevel 16 \
-    -s "${x}x${y}" \
-    -r 30 \
-    -f x11grab \
-    -i :0.0 \
-    "$dir/$cur.mp4"
+        ffmpeg -loglevel error \
+            -s "${x}x${y}" \
+            -r 30 \
+            -f x11grab \
+            -i :0.0 \
+            "$dir/$cur.mp4"
+    }
