@@ -2,37 +2,20 @@
 #
 # todo script
 
-# files
 todo=~/.todo
-temp=/tmp/todo
-
-cpt=1
 
 pri ()
-{
     while read -r line; do
         echo "$((cpt++))    $line"
     done < $todo
-}
 
 del ()
-{
-    > $temp || exit 1
-
     while read -r line; do
-        (($1 != cpt++)) && echo "$line" >> $temp
+        (($1 != cpt++)) && echo "$line"
     done < $todo
 
-    mv "$temp" "$todo"
-}
-
 case $1 in
-    add)
-        echo "$2" >> $todo
-        ;;
-    del)
-        del "$2"
-        ;;
-    *)
-        pri
+    add) echo       "$2"  >> $todo;;
+    del) echo "`del "$2"`" > $todo;;
+    *) pri
 esac
