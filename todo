@@ -11,7 +11,7 @@ cpt=1
 pri ()
 {
     while read -r line; do
-        echo "$((cpt++)) -> $line"
+        echo "$((cpt++))    $line"
     done < $todo
 }
 
