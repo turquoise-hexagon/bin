@@ -9,7 +9,7 @@ shopt -s checkwinsize; (:;:)
 
 while read -r a; do
     ((nb++))
-done < "$1"
+done < $1
 
 # center vertically
 for ((; i++ < (LINES - nb) / 2;)) do
@@ -19,4 +19,4 @@ done
 # center horizontally
 while read -r a; do
     printf '%*s\n' "$(((${#a} + COLUMNS) / 2))" "$a"
-done < "$1"
+done < $1
