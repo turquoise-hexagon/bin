@@ -5,7 +5,7 @@
 dir=~/pics/records
 cur=$(date +%F_%H-%M-%S)
 
-mkdir -p "$dir"
+mkdir -p "$dir" || exit 1
 
 # get monitor resolution
 bspc query -T -m | jq -r '
