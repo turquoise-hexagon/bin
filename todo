@@ -6,13 +6,13 @@ task=$2
 todo=~/.todo
 
 pri ()
-    while read -r line; do
-        echo "$((c++))    $line"
+    while read -r a; do
+        echo "$((c++))    $a"
     done < "$todo"
 
 del ()
-    while read -r line; do
-        ((task != c++)) && echo "$line"
+    while read -r a; do
+        ((task != c++)) && echo "$a"
     done < "$todo"
 
 case $1 in
