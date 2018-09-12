@@ -1,5 +1,0 @@
-usage :
-txtf [xlfd] [text]
-
-returns :
-width and height
