@@ -6,7 +6,8 @@ file=/tmp/ssid
 
 case $2 in
     up)
-        echo "$CONNECTION_ID" > $file;;
+        echo "$CONNECTION_ID" > $file
+	;;
     down)
-        echo > $file
+        echo Disconnected > $file
 esac
