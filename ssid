@@ -8,5 +8,5 @@ case $2 in
     up)
         echo "$CONNECTION_ID" > $file;;
     down)
-        > $file
+        echo > $file
 esac
