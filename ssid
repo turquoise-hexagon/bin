@@ -1,0 +1,12 @@
+#!/bin/sh
+#
+# /etc/NetworkManager/dispatcher.d/ssid
+
+file=/tmp/ssid
+
+case $2 in
+    up)
+        echo "$CONNECTION_ID" > $file;;
+    down)
+        > $file
+esac
