@@ -6,7 +6,10 @@ file=/tmp/ssid
 
 case $2 in
     up)
-        echo "$CONNECTION_ID" > $file;;
+        # send current SSID
+        echo "$CONNECTION_ID" >> $file
+	;;
     down)
-        echo > $file
+        # send empty SSID
+        echo >> $file
 esac
