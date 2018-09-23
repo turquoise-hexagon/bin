@@ -3,5 +3,5 @@
 # filter
 
 while read -r x; do
-    "$@" "$x" && echo "$x"
+    "$@" "$x" > /dev/null && echo "$x"
 done
