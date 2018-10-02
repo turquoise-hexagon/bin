@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# update cmus playlist
+# update mpd playlist
 
 {
     mpc update
