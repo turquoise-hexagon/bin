@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+#
+# simple timer
+
+if ! test "$2"; then
+    echo 'usage : [time] [message]'
+    exit 1
+fi
+
+{
+    until [[ `printf '%(%H:%M)T'` == $1 ]]; do
+        read -st 1
+    done
+
+    notify-send "$2"
+} &

@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+# update cmus playlist
+
+{
+    mpc update
+    mpc clear
+    mpc ls | mpc add
+} \
+    > /dev/null
