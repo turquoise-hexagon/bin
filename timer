@@ -11,7 +11,7 @@ if test -z "$time"; then
 fi
 
 {
-until [[ $(printf '%(%H:%M)T') == $1 ]]; do
+until [[ $(printf '%(%H:%M)T') == $time ]]; do
     sleep 1
 done
 
