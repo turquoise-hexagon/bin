@@ -9,7 +9,7 @@ fi
 
 {
     until [[ $(printf '%(%H:%M)T') == $1 ]]; do
-        read -st 1
+        sleep 1
     done
 
     notify-send "$2"
