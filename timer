@@ -8,7 +8,7 @@ if ! test "$2"; then
 fi
 
 {
-    until [[ `printf '%(%H:%M)T'` == $1 ]]; do
+    until [[ $(printf '%(%H:%M)T') == $1 ]]; do
         read -st 1
     done
 
