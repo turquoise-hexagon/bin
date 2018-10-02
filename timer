@@ -2,15 +2,18 @@
 #
 # simple timer
 
-if [[ ! $2 ]]; then
-    echo 'usage : [time] [message]'
+time=$1
+text=$2
+
+if test -z "$time"; then
+    echo 'usage : [time] [text]'
     exit 1
 fi
 
 {
-    until [[ $(printf '%(%H:%M)T') == $1 ]]; do
-        sleep 1
-    done
+until [[ $(printf '%(%H:%M)T') == $1 ]]; do
+    sleep 1
+done
 
-    notify-send "$2"
+notify-send "$text"
 } &
