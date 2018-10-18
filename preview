@@ -2,7 +2,7 @@
 #
 # center text
 
-clear
+printf '\e[2J\e[H'
 
 # get lines and columns
 shopt -s checkwinsize; (:;:)
