@@ -14,13 +14,13 @@ bspc query -T -m | jq -r '
         ,.rectangle.height
     ] |
     @sh' |
-    {
-        read -r x y
+{
+    read -r x y
 
-        ffmpeg -loglevel error \
-            -s "${x}x${y}" \
-            -r 30 \
-            -f x11grab \
-            -i :0.0 \
-            "$dir/$cur.mp4"
-    }
+    ffmpeg -loglevel error \
+        -s "${x}x${y}" \
+        -r 30 \
+        -f x11grab \
+        -i :0.0 \
+        "$dir/$cur.mp4"
+}
