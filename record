@@ -10,10 +10,9 @@ mkdir -p "$dir" || exit 1
 # get monitor resolution
 bspc query -T -m | jq -r '
     [
-         .rectangle.width
-        ,.rectangle.height
-    ] |
-    @sh' |
+        .rectangle.width,
+        .rectangle.height
+    ] | @sh' |
 {
     read -r x y
 
