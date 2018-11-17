@@ -17,6 +17,6 @@ del ()
 
 case $1 in
     add) echo "$task" >> "$todo";;
-    del) echo "`del`"  > "$todo";;
+    del) echo "$(del)" > "$todo";;
     *) pri
 esac
