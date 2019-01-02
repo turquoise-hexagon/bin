@@ -2,9 +2,6 @@
 #
 # simple timer
 
-# enable sleep builtin
-enable -f /usr/lib/bash/sleep sleep
-
 time=$1
 text=$2
 
