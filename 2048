@@ -1,0 +1,225 @@
+#!/usr/bin/env bash
+
+# ---
+# functions
+# ---
+
+color ()
+{
+    c=0
+
+    for a in 4 10; do
+        for b in {0..5}; do
+            ((c == $1)) && # get corresponding color
+                printf "%b%4s%b" "\\e[${a}${b}m" "$1" "\\e[0m"
+
+            ((c = c ? c * 2 : 2))
+        done
+    done
+}
+
+new ()
+{
+    ((x = RANDOM % 4, y = RANDOM % 4))
+
+    # generate a brand new cell
+    while ((game[$x $y])); do
+        ((x = RANDOM % 4, y = RANDOM % 4))
+    done
+
+    game[$x $y]=2
+}
+
+check ()
+{
+    c=0
+
+    for ((i = 0; i < 4; i++)) do
+        for ((j = 0; j < 4; j++)) do
+            ((game[$i $j] && c++, game[$i $j] == 2048)) && exit
+        done
+    done
+
+    ((c == 16)) && exit
+}
+
+display ()
+{
+    # print in place
+    printf "\\e[H"
+
+    for ((i = 0; i < 4; i++)) do
+        for ((j = 0; j < 4; j++)) do
+            color "${game[$i $j]}"
+        done
+    
+        printf "\\n"
+    done
+}
+
+push ()
+{
+    case $1 in
+        h)
+            for ((i = 0; i < 4; i++)) do
+                for ((j = 0; j < 4; j++)) do
+                    if ((! game[$i $j])); then
+                        for ((k = j + 1; k < 4; k++)) do
+                            ((game[$i $k])) && break
+                        done
+
+                        ((game[$i $j] = game[$i $k], game[$i $k] = 0))
+                    fi
+                done
+            done
+            ;;
+        k)
+            for ((i = 0; i < 4; i++)) do
+                for ((j = 0; j < 4; j++)) do
+                    if ((! game[$j $i])); then
+                        for ((k = j + 1; k < 4; k++)) do
+                            ((game[$k $i])) && break
+                        done
+
+                        ((game[$j $i] = game[$k $i], game[$k $i] = 0))
+                    fi
+                done
+            done
+            ;;
+        l) 
+            for ((i = 0; i < 4; i++)) do
+                for ((j = 3; j >= 0; j--)) do
+                    if ((! game[$i $j])); then
+                        for ((k = j - 1; k >= 0; k--)) do
+                            ((game[$i $k])) && break
+                        done
+
+                        ((game[$i $j] = game[$i $k], game[$i $k] = 0))
+                    fi
+                done
+            done
+            ;;
+        j)
+            for ((i = 0; i < 4; i++)) do
+                for ((j = 3; j >= 0; j--)) do
+                    if ((! game[$j $i])); then
+                        for ((k = j - 1; k >= 0; k--)) do
+                            ((game[$k $i])) && break
+                        done
+
+                        ((game[$j $i] = game[$k $i], game[$k $i] = 0))
+                    fi
+                done
+            done
+    esac
+}
+
+merge ()
+{
+    case $1 in
+        h)
+            for ((i = 0; i < 4; i++)) do
+                for ((j = 0; j < 4; j++)) do
+                    for ((k = j + 1; k < 4; k++)) do
+                        if ((game[$i $j] == game[$i $k])); then
+                            ((game[$i $j] += game[$i $k], game[$i $k] = 0))
+                            
+                            break
+                        fi
+                        
+                        ((game[$i $k])) && break
+                    done
+                done
+            done
+            ;;
+        k)
+            for ((i = 0; i < 4; i++)) do
+                for ((j = 0; j < 4; j++)) do
+                    for ((k = j + 1; k < 4; k++)) do
+                        if ((game[$j $i] == game[$k $i])); then
+                            ((game[$j $i] += game[$k $i], game[$k $i] = 0))
+
+                            break
+                        fi
+
+                        ((game[$k $i])) && break
+                    done
+                done
+            done
+            ;;
+        l)
+            for ((i = 0; i < 4; i++)) do
+                for ((j = 3; j >= 0; j--)) do
+                    for ((k = j - 1; k >= 0; k--)) do
+                        if ((game[$i $j] == game[$i $k])); then
+                            ((game[$i $j] += game[$i $k], game[$i $k] = 0))
+
+                            break
+                        fi
+
+                        ((game[$i $k])) && break
+                    done
+                done
+            done
+            ;;
+        j)
+            for ((i = 0; i < 4; i++)) do
+                for ((j = 3; j >= 0; j--)) do
+                    for ((k = j - 1; k >= 0; k--)) do
+                        if ((game[$j $i] == game[$k $i])); then
+                            ((game[$j $i] += game[$k $i], game[$k $i] = 0))
+
+                            break
+                        fi
+
+                        ((game[$k $i])) && break
+                    done
+                done
+            done
+    esac
+}
+
+# ---
+# init
+# ---
+
+printf "\\e[2J"
+
+declare -A game temp
+
+# fill the array
+for ((i = 0; i < 4; i++)) do
+    for ((j = 0; j < 4; j++)) do
+        ((game[$i $j] = 0))
+    done
+done
+
+new
+
+display
+
+# ---
+# main
+# ---
+
+while read -r -rsn 1 key; do
+    case $key in
+        h|j|k|l)
+            # save current state
+            for i in "${!game[@]}"; do
+                temp[$i]=${game[$i]}
+            done
+
+            merge "$key"
+            push  "$key"
+
+            check
+
+            # compare with new state
+            for i in "${!game[@]}"; do
+                ((temp[$i] != game[$i])) && { new; break; }
+            done
+
+            display
+    esac
+done
