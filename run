@@ -2,7 +2,4 @@
 #
 # run a command x times
 
-x=$1
-shift
-
-for ((; i++ < x;)) { "$@"; }
+for ((; i++ < $1;)) { "${@:2}"; }
