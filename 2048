@@ -30,11 +30,13 @@ new ()
 
 check ()
 {
+    c=0
+
     for i in {0..3}\ {0..3}; do
         ((g[$i] && c++, g[$i] == 2048)) && exit
     done
 
-    ((c == 16)) && exit || c=0
+    ((c == 16)) && exit
 }
 
 display ()
@@ -55,7 +57,7 @@ push ()
             for i in {0..3}; do
                 for j in {0..3}; do
                     for ((k = j + 1; k < 4; k++)) do
-                        ((g[$i $j] == g[$i $k] && (g[$i $j] += g[$i $k], g[$i $k] = 0))) && break
+                        ((g[$i $j] == g[$i $k])) && { ((g[$i $j] += g[$i $k], g[$i $k] = 0)); break; }
                         ((g[$i $k])) && break
                     done
                 done
@@ -77,7 +79,7 @@ push ()
             for i in {0..3}; do
                 for j in {0..3}; do
                     for ((k = j + 1; k < 4; k++)) do
-                        ((g[$j $i] == g[$k $i] && (g[$j $i] += g[$k $i], g[$k $i] = 0))) && break
+                        ((g[$j $i] == g[$k $i])) && { ((g[$j $i] += g[$k $i], g[$k $i] = 0)); break; }
                         ((g[$k $i])) && break
                     done
                 done
@@ -99,7 +101,7 @@ push ()
             for i in {0..3}; do
                 for j in {3..0}; do
                     for ((k = j - 1; k >= 0; k--)) do
-                        ((g[$i $j] == g[$i $k] && (g[$i $j] += g[$i $k], g[$i $k] = 0))) && break
+                        ((g[$i $j] == g[$i $k])) && { ((g[$i $j] += g[$i $k], g[$i $k] = 0)); break; }
                         ((g[$i $k])) && break
                     done
                 done
@@ -121,7 +123,7 @@ push ()
             for i in {0..3}; do
                 for j in {3..0}; do
                     for ((k = j - 1; k >= 0; k--)) do
-                        ((g[$j $i] == g[$k $i] && (g[$j $i] += g[$k $i], g[$k $i] = 0))) && break
+                        ((g[$j $i] == g[$k $i])) && { ((g[$j $i] += g[$k $i], g[$k $i] = 0)); break; }
                         ((g[$k $i])) && break
                     done
                 done
