@@ -21,11 +21,11 @@ new ()
     ((x = RANDOM % 4, y = RANDOM % 4))
 
     # generate a brand new cell
-    while ((game[$x $y])); do
+    while ((g[$x $y])); do
         ((x = RANDOM % 4, y = RANDOM % 4))
     done
 
-    game[$x $y]=2
+    g[$x $y]=2
 }
 
 check ()
@@ -33,7 +33,7 @@ check ()
     c=0
 
     for i in {0..3}\ {0..3}; do
-        ((game[$i] && c++, game[$i] == 2048)) && exit
+        ((g[$i] && c++, g[$i] == 2048)) && exit
     done
 
     ((c == 16)) && exit
@@ -45,7 +45,7 @@ display ()
     printf "\\e[H"
 
     for i in {0..3}\ {0..3}; do
-        color "${game[$i]}"
+        color "${g[$i]}"
         ((${i#?} == 3)) && printf "\\n"
     done
 }
@@ -56,12 +56,20 @@ push ()
         h)
             for i in {0..3}; do
                 for j in {0..3}; do
-                    if ((! game[$i $j])); then
+                    for ((k = j + 1; k < 4; k++)) do
+                        ((g[$i $j] == g[$i $k] && (g[$i $j] += g[$i $k], g[$i $k] = 0))) && break
+                    done
+                done
+            done
+
+            for i in {0..3}; do
+                for j in {0..3}; do
+                    if ((! g[$i $j])); then
                         for ((k = j + 1; k < 4; k++)) do
-                            ((game[$i $k])) && break
+                            ((g[$i $k])) && break
                         done
 
-                        ((game[$i $j] = game[$i $k], game[$i $k] = 0))
+                        ((g[$i $j] = g[$i $k], g[$i $k] = 0))
                     fi
                 done
             done
@@ -69,74 +77,21 @@ push ()
         k)
             for i in {0..3}; do
                 for j in {0..3}; do
-                    if ((! game[$j $i])); then
+                    for ((k = j + 1; k < 4; k++)) do
+                        ((g[$j $i] == g[$k $i] && (g[$j $i] += g[$k $i], g[$k $i] = 0))) && break
+                    done
+                done
+            done
+
+            for i in {0..3}; do
+                for j in {0..3}; do
+                    if ((! g[$j $i])); then
                         for ((k = j + 1; k < 4; k++)) do
-                            ((game[$k $i])) && break
+                            ((g[$k $i])) && break
                         done
 
-                        ((game[$j $i] = game[$k $i], game[$k $i] = 0))
+                        ((g[$j $i] = g[$k $i], g[$k $i] = 0))
                     fi
-                done
-            done
-            ;;
-        l) 
-            for i in {0..3}; do
-                for j in {3..0}; do
-                    if ((! game[$i $j])); then
-                        for ((k = j - 1; k >= 0; k--)) do
-                            ((game[$i $k])) && break
-                        done
-
-                        ((game[$i $j] = game[$i $k], game[$i $k] = 0))
-                    fi
-                done
-            done
-            ;;
-        j)
-            for i in {0..3}; do
-                for j in {3..0}; do
-                    if ((! game[$j $i])); then
-                        for ((k = j - 1; k >= 0; k--)) do
-                            ((game[$k $i])) && break
-                        done
-
-                        ((game[$j $i] = game[$k $i], game[$k $i] = 0))
-                    fi
-                done
-            done
-    esac
-}
-
-merge ()
-{
-    case $1 in
-        h)
-            for i in {0..3}; do
-                for j in {0..3}; do
-                    for ((k = j + 1; k < 4; k++)) do
-                        if ((game[$i $j] == game[$i $k])); then
-                            ((game[$i $j] += game[$i $k], game[$i $k] = 0))
-                            
-                            break
-                        fi
-                        
-                        ((game[$i $k])) && break
-                    done
-                done
-            done
-            ;;
-        k)
-            for i in {0..3}; do
-                for j in {0..3}; do
-                    for ((k = j + 1; k < 4; k++)) do
-                        if ((game[$j $i] == game[$k $i])); then
-                            ((game[$j $i] += game[$k $i], game[$k $i] = 0))
-
-                            break
-                        fi
-
-                        ((game[$k $i])) && break
-                    done
                 done
             done
             ;;
@@ -144,14 +99,20 @@ merge ()
             for i in {0..3}; do
                 for j in {3..0}; do
                     for ((k = j - 1; k >= 0; k--)) do
-                        if ((game[$i $j] == game[$i $k])); then
-                            ((game[$i $j] += game[$i $k], game[$i $k] = 0))
-
-                            break
-                        fi
-
-                        ((game[$i $k])) && break
+                        ((g[$i $j] == g[$i $k] && (g[$i $j] += g[$i $k], g[$i $k] = 0))) && break
                     done
+                done
+            done
+
+            for i in {0..3}; do
+                for j in {3..0}; do
+                    if ((! g[$i $j])); then
+                        for ((k = j - 1; k >= 0; k--)) do
+                            ((g[$i $k])) && break
+                        done
+
+                        ((g[$i $j] = g[$i $k], g[$i $k] = 0))
+                    fi
                 done
             done
             ;;
@@ -159,14 +120,20 @@ merge ()
             for i in {0..3}; do
                 for j in {3..0}; do
                     for ((k = j - 1; k >= 0; k--)) do
-                        if ((game[$j $i] == game[$k $i])); then
-                            ((game[$j $i] += game[$k $i], game[$k $i] = 0))
-
-                            break
-                        fi
-
-                        ((game[$k $i])) && break
+                        ((g[$j $i] == g[$k $i] && (g[$j $i] += g[$k $i], g[$k $i] = 0))) && break
                     done
+                done
+            done
+
+            for i in {0..3}; do
+                for j in {3..0}; do
+                    if ((! g[$j $i])); then
+                        for ((k = j - 1; k >= 0; k--)) do
+                            ((game[$k $i])) && break
+                        done
+
+                        ((g[$j $i] = g[$k $i], g[$k $i] = 0))
+                    fi
                 done
             done
     esac
@@ -178,11 +145,11 @@ merge ()
 
 printf "\\e[2J"
 
-declare -A game temp
+declare -A g t
 
 # fill the array
 for i in {0..3}\ {0..3}; do
-    ((game[$i] = 0))
+    ((g[$i] = 0))
 done
 
 new
@@ -197,18 +164,17 @@ while read -r -rsn 1 key; do
     case $key in
         h|j|k|l)
             # save current state
-            for i in "${!game[@]}"; do
-                temp[$i]=${game[$i]}
+            for i in "${!g[@]}"; do
+                t[$i]=${g[$i]}
             done
 
-            merge "$key"
-            push  "$key"
+            push "$key"
 
             check
 
             # compare with new state
-            for i in "${!game[@]}"; do
-                ((temp[$i] != game[$i])) && { new; break; }
+            for i in "${!g[@]}"; do
+                ((t[$i] != g[$i])) && { new; break; }
             done
 
             display
