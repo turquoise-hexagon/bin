@@ -30,13 +30,11 @@ new ()
 
 check ()
 {
-    c=0
-
     for i in {0..3}\ {0..3}; do
         ((g[$i] && c++, g[$i] == 2048)) && exit
     done
 
-    ((c == 16)) && exit
+    ((c == 16)) && exit || c=0
 }
 
 display ()
