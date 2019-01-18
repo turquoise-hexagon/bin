@@ -156,13 +156,11 @@ done
 
 new
 
-display
-
 # ---
 # main
 # ---
 
-while read -r -rsn 1 key; do
+while display; read -r -rsn 1 key; do
     # save current state
     for i in "${!g[@]}"; do
         t[$i]=${g[$i]}
@@ -176,6 +174,4 @@ while read -r -rsn 1 key; do
     for i in "${!g[@]}"; do
         ((t[$i] != g[$i])) && { new; break; }
     done
-
-    display
 done
