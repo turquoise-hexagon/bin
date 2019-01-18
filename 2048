@@ -163,22 +163,19 @@ display
 # ---
 
 while read -r -rsn 1 key; do
-    case $key in
-        h|j|k|l)
-            # save current state
-            for i in "${!g[@]}"; do
-                t[$i]=${g[$i]}
-            done
+    # save current state
+    for i in "${!g[@]}"; do
+        t[$i]=${g[$i]}
+    done
 
-            push "$key"
+    push "$key"
 
-            check
+    check
 
-            # compare with new state
-            for i in "${!g[@]}"; do
-                ((t[$i] != g[$i])) && { new; break; }
-            done
+    # compare with new state
+    for i in "${!g[@]}"; do
+        ((t[$i] != g[$i])) && { new; break; }
+    done
 
-            display
-    esac
+    display
 done
