@@ -58,6 +58,7 @@ push ()
                 for j in {0..3}; do
                     for ((k = j + 1; k < 4; k++)) do
                         ((g[$i $j] == g[$i $k] && (g[$i $j] += g[$i $k], g[$i $k] = 0))) && break
+                        ((g[$i $k])) && break
                     done
                 done
             done
@@ -79,6 +80,7 @@ push ()
                 for j in {0..3}; do
                     for ((k = j + 1; k < 4; k++)) do
                         ((g[$j $i] == g[$k $i] && (g[$j $i] += g[$k $i], g[$k $i] = 0))) && break
+                        ((g[$k $i])) && break
                     done
                 done
             done
@@ -100,6 +102,7 @@ push ()
                 for j in {3..0}; do
                     for ((k = j - 1; k >= 0; k--)) do
                         ((g[$i $j] == g[$i $k] && (g[$i $j] += g[$i $k], g[$i $k] = 0))) && break
+                        ((g[$i $k])) && break
                     done
                 done
             done
@@ -121,6 +124,7 @@ push ()
                 for j in {3..0}; do
                     for ((k = j - 1; k >= 0; k--)) do
                         ((g[$j $i] == g[$k $i] && (g[$j $i] += g[$k $i], g[$k $i] = 0))) && break
+                        ((g[$k $i])) && break
                     done
                 done
             done
