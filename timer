@@ -11,9 +11,9 @@ if test -z "$time"; then
 fi
 
 {
-until [[ $(printf '%(%H:%M)T') == $time ]]; do
-    sleep 10
-done
+    until [[ $(printf '%(%H:%M)T') == $time ]]; do
+        read -rst 10 -N 1000
+    done
 
-notify-send "$text"
+    notify-send "$text"
 } &
