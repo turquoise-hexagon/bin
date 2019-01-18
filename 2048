@@ -65,13 +65,10 @@ push ()
 
             for i in {0..3}; do
                 for j in {0..3}; do
-                    if ((! g[$i $j])); then
+                    ((! g[$i $j])) &&
                         for ((k = j + 1; k < 4; k++)) do
-                            ((g[$i $k])) && break
+                            ((g[$i $k])) && { ((g[$i $j] = g[$i $k], g[$i $k] = 0)); break; }
                         done
-
-                        ((g[$i $j] = g[$i $k], g[$i $k] = 0))
-                    fi
                 done
             done
             ;;
@@ -87,13 +84,10 @@ push ()
 
             for i in {0..3}; do
                 for j in {0..3}; do
-                    if ((! g[$j $i])); then
+                    ((! g[$j $i])) &&
                         for ((k = j + 1; k < 4; k++)) do
-                            ((g[$k $i])) && break
+                            ((g[$k $i])) && { ((g[$j $i] = g[$k $i], g[$k $i] = 0)); break; }
                         done
-
-                        ((g[$j $i] = g[$k $i], g[$k $i] = 0))
-                    fi
                 done
             done
             ;;
@@ -109,13 +103,10 @@ push ()
 
             for i in {0..3}; do
                 for j in {3..0}; do
-                    if ((! g[$i $j])); then
+                    ((! g[$i $j])) &&
                         for ((k = j - 1; k >= 0; k--)) do
-                            ((g[$i $k])) && break
+                            ((g[$i $k])) && { ((g[$i $j] = g[$i $k], g[$i $k] = 0)); break; }
                         done
-
-                        ((g[$i $j] = g[$i $k], g[$i $k] = 0))
-                    fi
                 done
             done
             ;;
@@ -131,13 +122,10 @@ push ()
 
             for i in {0..3}; do
                 for j in {3..0}; do
-                    if ((! g[$j $i])); then
+                    ((! g[$j $i])) &&
                         for ((k = j - 1; k >= 0; k--)) do
-                            ((g[$k $i])) && break
+                            ((g[$k $i])) && { ((g[$j $i] = g[$k $i], g[$k $i] = 0)); break; }
                         done
-
-                        ((g[$j $i] = g[$k $i], g[$k $i] = 0))
-                    fi
                 done
             done
     esac
