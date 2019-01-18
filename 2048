@@ -129,7 +129,7 @@ push ()
                 for j in {3..0}; do
                     if ((! g[$j $i])); then
                         for ((k = j - 1; k >= 0; k--)) do
-                            ((game[$k $i])) && break
+                            ((g[$k $i])) && break
                         done
 
                         ((g[$j $i] = g[$k $i], g[$k $i] = 0))
