@@ -150,7 +150,7 @@ new
 # main
 # ---
 
-while display; read -r -rsn 1 key; do
+while display; read -rsn 1 key; do
     # save current state
     for i in "${!g[@]}"; do
         t[$i]=${g[$i]}
