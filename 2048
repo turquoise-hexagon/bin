@@ -52,45 +52,41 @@ display ()
 
 push ()
 {
-    case $1 in
-        h|k)
-             for i in {0..3}; do
-                for j in {0..3}; do
+    for i in {0..3}; do
+        if [[ $1 =~ h|k ]]; then
+            for j in {0..3}; do
+                for ((k = j + 1; k < 4; k++)) do
+                    [[ $1 == h ]] && { a="$i $j"; b="$i $k"; } || { a="$j $i"; b="$k $i"; }
+                    ((g[$a] == g[$b])) && { ((g[$a] += g[$b], g[$b] = 0)); break; }
+                    ((g[$b])) && break
+                done
+            done
+            for j in {0..3}; do
+                [[ $1 == h ]] && a="$i $j" || a="$j $i"
+                ((! g[$a])) &&
                     for ((k = j + 1; k < 4; k++)) do
-                        [[ $1 == h ]] && { a="$i $j"; b="$i $k"; } || { a="$j $i"; b="$k $i"; }
-                        ((g[$a] == g[$b])) && { ((g[$a] += g[$b], g[$b] = 0)); break; }
-                        ((g[$b])) && break
+                        [[ $1 == h ]] && b="$i $k" || b="$k $i"
+                        ((g[$b])) && { ((g[$a] = g[$b], g[$b] = 0)); break; }
                     done
-                done
-                for j in {0..3}; do
-                    [[ $1 == h ]] && a="$i $j" || a="$j $i"
-                    ((! g[$a])) &&
-                        for ((k = j + 1; k < 4; k++)) do
-                            [[ $1 == h ]] && b="$i $k" || b="$k $i"
-                            ((g[$b])) && { ((g[$a] = g[$b], g[$b] = 0)); break; }
-                        done
+            done
+        elif [[ $1 =~ l|j ]]; then
+            for j in {3..0}; do
+                for ((k = j - 1; k >= 0; k--)) do
+                    [[ $1 == l ]] && { a="$i $j"; b="$i $k"; } || { a="$j $i"; b="$k $i"; }
+                    ((g[$a] == g[$b])) && { ((g[$a] += g[$b], g[$b] = 0)); break; }
+                    ((g[$b])) && break
                 done
             done
-           ;;
-        j|l)
-            for i in {0..3}; do
-                for j in {3..0}; do
+            for j in {3..0}; do
+                [[ $1 == l ]] && a="$i $j" || a="$j $i"
+                ((! g[$a])) &&
                     for ((k = j - 1; k >= 0; k--)) do
-                        [[ $1 == l ]] && { a="$i $j"; b="$i $k"; } || { a="$j $i"; b="$k $i"; }
-                        ((g[$a] == g[$b])) && { ((g[$a] += g[$b], g[$b] = 0)); break; }
-                        ((g[$b])) && break
+                        [[ $1 == l ]] && b="$i $k" || b="$k $i"
+                        ((g[$b])) && { ((g[$a] = g[$b], g[$b] = 0)); break; }
                     done
-                done
-                for j in {3..0}; do
-                    [[ $1 == l ]] && a="$i $j" || a="$j $i"
-                    ((! g[$a])) &&
-                        for ((k = j - 1; k >= 0; k--)) do
-                            [[ $1 == l ]] && b="$i $k" || b="$k $i"
-                            ((g[$b])) && { ((g[$a] = g[$b], g[$b] = 0)); break; }
-                        done
-                done
             done
-    esac
+        fi
+    done
 }
 
 # ---
