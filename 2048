@@ -61,9 +61,6 @@ push ()
                         ((g[$i $k])) && break
                     done
                 done
-            done
-
-            for i in {0..3}; do
                 for j in {0..3}; do
                     ((! g[$i $j])) &&
                         for ((k = j + 1; k < 4; k++)) do
@@ -80,9 +77,6 @@ push ()
                         ((g[$k $i])) && break
                     done
                 done
-            done
-
-            for i in {0..3}; do
                 for j in {0..3}; do
                     ((! g[$j $i])) &&
                         for ((k = j + 1; k < 4; k++)) do
@@ -99,9 +93,6 @@ push ()
                         ((g[$i $k])) && break
                     done
                 done
-            done
-
-            for i in {0..3}; do
                 for j in {3..0}; do
                     ((! g[$i $j])) &&
                         for ((k = j - 1; k >= 0; k--)) do
@@ -118,9 +109,6 @@ push ()
                         ((g[$k $i])) && break
                     done
                 done
-            done
-
-            for i in {0..3}; do
                 for j in {3..0}; do
                     ((! g[$j $i])) &&
                         for ((k = j - 1; k >= 0; k--)) do
