@@ -8,16 +8,12 @@ cur=$(date +%F_%H-%M-%S)
 mkdir -p "$dir" || exit 1
 
 # get monitor resolution
-bspc query -T -m | jq -r '
-    [
-        .rectangle.width,
-        .rectangle.height
-    ] | @sh' |
+wattr wh "$(lsw -r)"
 {
-    read -r x y
+    read -r w h
 
     ffmpeg -loglevel error \
-        -s "${x}x${y}" \
+        -s "${w}x${h}" \
         -r 30 \
         -f x11grab \
         -i :0.0 \
