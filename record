@@ -8,7 +8,7 @@ cur=$(date +%F_%H-%M-%S)
 mkdir -p "$dir" || exit 1
 
 # get monitor resolution
-wattr wh "$(lsw -r)"
+wattr wh "$(lsw -r)" |
 {
     read -r w h
 
