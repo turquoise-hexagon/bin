@@ -2,15 +2,16 @@
 #
 # center text
 
+# \e[2J   : clear the screen
+# \e[H    : print in 0, 0
+# \e[?25l : hide the cursor
 printf '\e[2J\e[H\e[?25l'
 
-# get lines and columns
 shopt -s checkwinsize; (:;:)
 
-mapfile nb < "$1"; nb=${#nb[@]}
-
 # center vertically
-for ((; i++ < (LINES - nb) / 2;)) do
+mapfile nb < "$1"
+for ((; i++ < (LINES - ${#nb[@]}) / 2;)) do
     echo
 done
 
@@ -18,3 +19,8 @@ done
 while read -r a; do
     printf '%*s\n' "$(((${#a} + COLUMNS) / 2))" "$a"
 done < "$1"
+
+# keep the prompt busy
+# \e[?25h : show the cursor
+read -rst 10 -N 1000
+printf '\e[?25h'
