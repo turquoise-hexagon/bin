@@ -20,7 +20,8 @@ while read -r a; do
     printf '%*s\n' $(((${#a} + COLUMNS) / 2)) "$a"
 done < "$1"
 
-# keep the prompt busy
 # \e[?25h : show the cursor
-read -rst 10 -N 1000
-printf '\e[?25h'
+trap 'printf "\e[?25h"' INT EXIT
+
+# keep the prompt busy
+sleep 10
