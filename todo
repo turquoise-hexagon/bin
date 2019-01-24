@@ -5,12 +5,12 @@
 task=$2
 todo=~/.todo
 
-pri ()
+pri()
     while read -r a; do
         printf '%-5s%s\n' $((c++)) "$a"
     done < "$todo"
 
-del ()
+del()
     while read -r a; do
         ((task != c++)) && echo "$a"
     done < "$todo"

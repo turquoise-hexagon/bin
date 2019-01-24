@@ -4,7 +4,7 @@
 # functions
 # ---
 
-color ()
+color()
 {
     c=0
 
@@ -16,7 +16,7 @@ color ()
     done
 }
 
-new ()
+new()
 {
     ((x = RANDOM % 4, y = RANDOM % 4))
 
@@ -28,7 +28,7 @@ new ()
     g[$x $y]=2
 }
 
-check ()
+check()
 {
     c=0
 
@@ -39,7 +39,7 @@ check ()
     ((c == 16)) && exit
 }
 
-display ()
+display()
 {
     # print in place
     printf "\\e[H"
@@ -50,7 +50,7 @@ display ()
     done
 }
 
-push ()
+push()
 {
     for i in {0..3}; do
         if [[ $1 =~ h|k ]]; then

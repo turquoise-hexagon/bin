@@ -2,7 +2,7 @@
 #
 # rename pictures based on exifs
 
-_ ()
+_()
 {
     var=$(exif -mt DateTime "$1")
 

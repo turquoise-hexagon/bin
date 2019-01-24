@@ -2,7 +2,7 @@
 #
 # display colorscheme
 
-_ () { echo -e "\e[$1"{0..7}"m  \e[0m"; }
+_() { echo -e "\e[$1"{0..7}"m  \e[0m"; }
 
 echo
 _ 4
