@@ -15,7 +15,6 @@ del()
         ((task != c++)) && echo "$a"
     done < "$todo"
 
-
 if ((! $#)); then
     pri; exit
 fi
