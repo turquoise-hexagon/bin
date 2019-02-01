@@ -2,18 +2,15 @@
 #
 # run command at a specified time
 
-time=$1
-task=${*:2}
-
-if test -z "$time"; then
+if test -z "$1"; then
     echo 'usage : [time] [command]'
     exit 1
 fi
 
 {
-    until [[ $(printf '%(%R)T') == "$time" ]]; do
+    until [[ $(printf '%(%R)T') == "$1" ]]; do
         read -rst 10 -N 1000
     done
 
-    $task
+    "${@:2}"
 } &
