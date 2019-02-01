@@ -3,7 +3,7 @@
 # run command at a specified time
 
 if test -z "$1"; then
-    echo 'usage : [time] [command]'
+    echo 'usage : at [time] [command]'
     exit 1
 fi
 

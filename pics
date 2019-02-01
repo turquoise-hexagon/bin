@@ -18,4 +18,9 @@ _()
     echo "$1 -> $var.$ext"
 }
 
+if ((! $#)); then
+    echo 'usage : pics [file...]'
+    exit 1
+fi
+
 for file in "$@"; { _ "$file"; }

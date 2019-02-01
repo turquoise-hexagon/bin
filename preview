@@ -1,27 +1,33 @@
 #!/usr/bin/env bash
 #
-# center text
+# center text and hide ui
 
-# \e[2J   : clear the screen
+if ! test -f "$1"; then
+    echo 'usage : preview [file]'
+    exit 1
+fi
+
+# get terminal size
+shopt -s checkwinsize; (:;:)
+
 # \e[H    : print in 0, 0
+# \e[2J   : clear the screen
 # \e[?25l : hide the cursor
 printf '\e[2J\e[H\e[?25l'
 
-shopt -s checkwinsize; (:;:)
+# \e[?25h : show the cursor
+trap "printf '\e[?25h'" INT EXIT
 
 # center vertically
-mapfile nb < "$1"
-for ((; i++ < (LINES - ${#nb[@]}) / 2;)) do
+mapfile a < "$1"
+for ((; i++ < (LINES - ${#a[@]}) / 2;)) do
     echo
 done
 
 # center horizontally
-while read -r a; do
-    printf '%*s\n' $(((${#a} + COLUMNS) / 2)) "$a"
+while read -r l; do
+    printf '%*s\n' $(((${#l} + COLUMNS) / 2)) "$l"
 done < "$1"
-
-# \e[?25h : show the cursor
-trap 'printf "\e[?25h"' INT EXIT
 
 # keep the prompt busy
 sleep 10
