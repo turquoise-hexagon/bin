@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 #
-# simple timer
+# run command at a specified time
 
 time=$1
-text=${*:2}
+task=${*:2}
 
 if test -z "$time"; then
-    echo 'usage : [time] [text]'
+    echo 'usage : [time] [command]'
     exit 1
 fi
 
@@ -15,5 +15,5 @@ fi
         read -rst 10 -N 1000
     done
 
-    notify-send "$text"
+    $task
 } &
