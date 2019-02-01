@@ -9,7 +9,7 @@ fi
 
 {
     until [[ $(printf '%(%R)T') == "$1" ]]; do
-        read -rst 10 -N 1000
+        sleep 10
     done
 
     "${@:2}"
