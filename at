@@ -2,7 +2,7 @@
 #
 # run command at a specified time
 
-if test -z "$1"; then
+if (($# < 2)); then
     echo 'usage : at [time] [command]'
     exit 1
 fi
