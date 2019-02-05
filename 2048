@@ -109,6 +109,8 @@ new
 # ---
 
 while display; read -rsn 1 key; do
+    [[ $key == q ]] && exit
+
     # save current state
     for i in "${!g[@]}"; do
         t[$i]=${g[$i]}
