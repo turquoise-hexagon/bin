@@ -12,10 +12,13 @@ wattr wh "$(lsw -r)" |
 {
     read -r w h
 
-    ffmpeg -loglevel error \
-        -s "${w}x${h}" \
-        -r 30 \
-        -f x11grab \
-        -i :0.0 \
+    ffmpeg -loglevel 16 \
+        -s "${w}x${h}"  \
+        -f x11grab      \
+        -i :0.0         \
+        -r 30           \
+        -preset slow    \
+        -c:v h264       \
+        -crf 20         \
         "$dir/$cur.mp4"
 }
