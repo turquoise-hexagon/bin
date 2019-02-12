@@ -5,11 +5,9 @@
 read -ra dependencies <<< $(prt-get quickdep "$1")
 
 for package in "${dependencies[@]}"; do
-    var=1
-
     while read -r dependent; do
-        [[ ${dependencies[*]} =~ $dependent ]] || { var=0; break; }
+        [[ ${dependencies[*]} =~ $dependent ]] || continue 2
     done < <(prt-get dependent --recursive "$package")
 
-    ((var)) && echo "$package"
+    echo "$package"
 done
