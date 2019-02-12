@@ -2,6 +2,11 @@
 #
 # get orphans
 
+if ((! $#)); then
+    echo 'usage : orphans [package]'
+    exit 1
+fi
+
 read -ra dependencies <<< $(prt-get quickdep "$1")
 
 for package in "${dependencies[@]}"; do
