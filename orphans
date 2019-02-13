@@ -7,9 +7,11 @@ if ((! $#)); then
     exit 1
 fi
 
+# get dependencies and store them in an array
 read -ra dependencies <<< $(prt-get quickdep "$1")
 
 for package in "${dependencies[@]}"; do
+    # check if all dependents are dependencies
     while read -r dependent; do
         [[ ${dependencies[*]} =~ $dependent ]] || continue 2
     done < <(prt-get dependent --recursive "$package")

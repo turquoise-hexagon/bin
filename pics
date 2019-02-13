@@ -9,10 +9,10 @@ _()
     # format date
     ext=${1##*.}
     var=${var//:/-}
-    var=${var// /_}
+    var=${var// /_}.$ext
 
-    mv   "$1"  "$var.$ext"
-    echo "$1 -> $var.$ext"
+    mv   "$1"  "$var"
+    echo "$1 -> $var"
 }
 
 if ((! $#)); then
