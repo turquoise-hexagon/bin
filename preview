@@ -24,7 +24,7 @@ for ((; i < (LINES - ${#a[@]}) / 2; i++)) { echo; }
 
 # center horizontally
 while read -r l; do
-    printf '%*s\n' $(((${#l} + COLUMNS) / 2)) "$l"
+    printf '%*s\n' "$(((${#l} + COLUMNS) / 2))" "$l"
 done < "$1"
 
 sleep 10
