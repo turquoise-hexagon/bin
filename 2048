@@ -91,9 +91,7 @@ while display; read -rsn 1 key; do
         t[$i]=${g[$i]}
     done
 
-    case $key in
-        [hjkl]) "push_$key"; check
-    esac
+    [[ $key =~ [hjkl] ]] && { "push_$key"; check; }
 
     # compare with new state
     for i in "${!g[@]}"; do
