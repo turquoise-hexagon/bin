@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-# ---
-# functions
-# ---
-
 color() {
     c=
 
@@ -46,47 +42,32 @@ display() {
     done
 }
 
-push() {
-    for i in {0..3}; do
-        if [[ $1 =~ h|k ]]; then
-            for j in {0..3}; do
-                for ((k = j + 1; k < 4; k++)) do
-                    [[ $1 == h ]] && { a="$i $j"; b="$i $k"; } || { a="$j $i"; b="$k $i"; }
-                    ((g[$a] == g[$b])) && { ((g[$a] += g[$b], g[$b] = 0)); break; }
-                    ((g[$b])) && break
-                done
-            done
-            for j in {0..3}; do
-                [[ $1 == h ]] && a="$i $j" || a="$j $i"
-                ((! g[$a])) &&
-                    for ((k = j + 1; k < 4; k++)) do
-                        [[ $1 == h ]] && b="$i $k" || b="$k $i"
-                        ((g[$b])) && { ((g[$a] = g[$b], g[$b] = 0)); break; }
-                    done
-            done
-        elif [[ $1 =~ l|j ]]; then
-            for j in {3..0}; do
-                for ((k = j - 1; k >= 0; k--)) do
-                    [[ $1 == l ]] && { a="$i $j"; b="$i $k"; } || { a="$j $i"; b="$k $i"; }
-                    ((g[$a] == g[$b])) && { ((g[$a] += g[$b], g[$b] = 0)); break; }
-                    ((g[$b])) && break
-                done
-            done
-            for j in {3..0}; do
-                [[ $1 == l ]] && a="$i $j" || a="$j $i"
-                ((! g[$a])) &&
-                    for ((k = j - 1; k >= 0; k--)) do
-                        [[ $1 == l ]] && b="$i $k" || b="$k $i"
-                        ((g[$b])) && { ((g[$a] = g[$b], g[$b] = 0)); break; }
-                    done
-            done
-        fi
-    done
-}
+template() {
+    case $1 in
+        h) a='0..3'; b='k = j + 1; k < 4; k++';  c='$i $j'; d='$i $k';;
+        j) a='3..0'; b='k = j - 1; k >= 0; k--'; c='$j $i'; d='$k $i';;
+        k) a='0..3'; b='k = j + 1; k < 4; k++';  c='$j $i'; d='$k $i';;
+        l) a='3..0'; b='k = j - 1; k >= 0; k--'; c='$i $j'; d='$i $k';;
+    esac
 
-# ---
-# init
-# ---
+    eval "
+        push_$1() {
+            for i in {0..3}; do
+                for j in {$a}; do
+                    for (($b)) do
+                        ((g[$c] == g[$d])) && { ((g[$c] += g[$d], g[$d] = 0)); break; }
+                        ((g[$d])) && break
+                    done
+                done
+                for j in {$a}; do
+                    ((! g[$c])) &&
+                        for (($b)) do
+                            ((g[$d])) && { ((g[$c] = g[$d], g[$d] = 0)); break; }
+                        done
+                done
+            done
+        }"
+}
 
 printf "\\e[2J"
 
@@ -97,23 +78,22 @@ for i in {0..3}\ {0..3}; do
     ((g[$i] = 0))
 done
 
+# create functions
+for key in h j k l; do
+    template "$key"
+done
+
 new
 
-# ---
-# main
-# ---
-
 while display; read -rsn 1 key; do
-    [[ $key == q ]] && exit
-
     # save current state
     for i in "${!g[@]}"; do
         t[$i]=${g[$i]}
     done
 
-    push "$key"
-
-    check
+    case $key in
+        [hjkl]) "push_$key"; check
+    esac
 
     # compare with new state
     for i in "${!g[@]}"; do
