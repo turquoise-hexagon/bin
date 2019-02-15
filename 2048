@@ -46,9 +46,9 @@ display() {
 
 template() {
     case $1 in
-        h) a='0..3'; b='k = j + 1; k < 4; k++';  c='$i $j'; d='$i $k';;
+        h) a='0..3'; b='k = j + 1; k <  4; k++'; c='$i $j'; d='$i $k';;
         j) a='3..0'; b='k = j - 1; k >= 0; k--'; c='$j $i'; d='$k $i';;
-        k) a='0..3'; b='k = j + 1; k < 4; k++';  c='$j $i'; d='$k $i';;
+        k) a='0..3'; b='k = j + 1; k <  4; k++'; c='$j $i'; d='$k $i';;
         l) a='3..0'; b='k = j - 1; k >= 0; k--'; c='$i $j'; d='$i $k';;
     esac
 
