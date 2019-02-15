@@ -4,9 +4,8 @@
 # functions
 # ---
 
-color()
-{
-    c=0
+color() {
+    c=
 
     for a in 4{0..5} 10{0..5}; do
         ((c == $1)) && # get corresponding color
@@ -16,8 +15,7 @@ color()
     done
 }
 
-new()
-{
+new() {
     ((x = RANDOM % 4, y = RANDOM % 4))
 
     # generate a brand new cell
@@ -28,9 +26,8 @@ new()
     g[$x $y]=2
 }
 
-check()
-{
-    c=0
+check() {
+    c=
 
     for i in {0..3}\ {0..3}; do
         ((g[$i] && c++, g[$i] == 2048)) && exit
@@ -39,8 +36,7 @@ check()
     ((c == 16)) && exit
 }
 
-display()
-{
+display() {
     # print in place
     printf "\\e[H"
 
@@ -50,8 +46,7 @@ display()
     done
 }
 
-push()
-{
+push() {
     for i in {0..3}; do
         if [[ $1 =~ h|k ]]; then
             for j in {0..3}; do

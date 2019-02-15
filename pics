@@ -2,14 +2,12 @@
 #
 # rename pictures based on exifs
 
-_()
-{
+_() {
     var=$(exif -mt DateTime "$1") || exit 1
 
     # format date
-    ext=${1##*.}
     var=${var//:/-}
-    var=${var// /_}.$ext
+    var=${var// /_}.${1##*.}
 
     mv   "$1"  "$var"
     echo "$1 -> $var"
