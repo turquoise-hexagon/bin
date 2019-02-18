@@ -7,6 +7,9 @@ if [[ ! -f $1 ]]; then
     exit 1
 fi
 
+# enable sleep builtin
+enable -f /usr/lib/bash/sleep sleep
+
 # get terminal window size
 shopt -s checkwinsize; (:;:)
 

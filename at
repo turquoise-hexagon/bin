@@ -7,6 +7,9 @@ if (($# < 2)); then
     exit 1
 fi
 
+# enable sleep builtin
+enable -f /usr/lib/bash/sleep sleep
+
 {
     until [[ $(printf '%(%R)T') == "$1" ]]; do
         sleep 10
