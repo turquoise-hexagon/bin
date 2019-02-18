@@ -20,7 +20,7 @@ if ((! $#)); then
 fi
 
 case $1 in
-    add) echo "$task" >> "$todo";;
-    del) echo "$(del)" > "$todo";;
+    add) echo "${@:2}" >> "$todo";;
+    del) echo "$(del)"  > "$todo";;
     *) echo 'usage : todo <add|del> [text|n]'
 esac
