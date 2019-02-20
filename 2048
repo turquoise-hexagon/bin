@@ -5,7 +5,7 @@
 color() {
     c=
 
-    for a in 4{0..5} 10{0..5}; do
+    for a in {4,10}{0..5}; do
         # get the corresponding color
         ((c == $1)) && printf '\e[%sm%4s\e[m' "$a" "$1"
 
