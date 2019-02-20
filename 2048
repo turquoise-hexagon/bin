@@ -22,7 +22,6 @@ check() {
 }
 
 display() {
-    # print in place
     printf '\e[H'
 
     for i in {0..3},{0..3}; do
@@ -50,6 +49,7 @@ template() {
     eval "
     push_$1() {
         for i in {0..3}; do
+            # merge tiles
             for j in {$a}; do
                 for (($b)) do
                     ((g[$c] == g[$d])) && { ((g[$c] += g[$d], g[$d] = 0)); break; }
@@ -57,6 +57,7 @@ template() {
                 done
             done
 
+            # push tiles
             for j in {$a}; do
                 ((! g[$c])) &&
                     for (($b)) do
@@ -71,12 +72,12 @@ printf '\e[2J'
 
 declare -A g t
 
-# fill the array
+# init array
 for i in {0..3},{0..3}; do
     g[$i]=0
 done
 
-# create functions
+# init functions
 for key in h j k l; do
     template "$key"
 done
