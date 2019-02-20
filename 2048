@@ -76,7 +76,7 @@ declare -A g t
 
 # fill the array
 for i in {0..3},{0..3}; do
-    ((g[$i] = 0))
+    g[$i]=0
 done
 
 # create functions
