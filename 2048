@@ -2,17 +2,6 @@
 #
 # 2048 but in bash
 
-color() {
-    c=
-
-    for a in {4,10}{0..5}; do
-        # get the corresponding color
-        ((c == $1)) && printf '\e[%sm%4s\e[m' "$a" "$1"
-
-        ((c = c ? c * 2 : 2))
-    done
-}
-
 new() {
     # generate a brand new cell
     while ((x = RANDOM % 4, y = RANDOM % 4)); do
@@ -37,8 +26,16 @@ display() {
     printf '\e[H'
 
     for i in {0..3},{0..3}; do
-        color "${g[$i]}"
-        ((${i#??} == 3)) && echo
+        c=
+
+        for a in {4,10}{0..5}; do
+            ((c == ${g[$i]})) && # get the right color
+                printf '\e[%sm%4s\e[m' "$a" "${g[$i]}"
+
+            ((c = c ? c * 2 : 2))
+        done
+
+        ((${i#??} == 3)) && printf '\n'
     done
 }
 
