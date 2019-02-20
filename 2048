@@ -61,7 +61,7 @@ template() {
 
             # push tiles
             for j in {$a}; do
-                ((! g[$c])) &&
+                ((g[$c])) ||
                     for (($b)) do
                         ((g[$d])) && { ((g[$c] = g[$d], g[$d] = 0)); break; }
                     done
