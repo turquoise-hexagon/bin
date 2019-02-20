@@ -3,9 +3,11 @@
 # 2048 but in bash
 
 new() {
+    ((x = RANDOM % 4, y = RANDOM % 4))
+
     # generate a brand new cell
-    while ((x = RANDOM % 4, y = RANDOM % 4)); do
-        ((g[$x,$y])) || break
+    while ((g[$x,$y])); do
+        ((x = RANDOM % 4, y = RANDOM % 4))
     done
 
     g[$x,$y]=2
