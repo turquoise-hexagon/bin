@@ -14,11 +14,9 @@ color() {
 }
 
 new() {
-    ((x = RANDOM % 4, y = RANDOM % 4))
-
     # generate a brand new cell
-    while ((g[$x,$y])); do
-        ((x = RANDOM % 4, y = RANDOM % 4))
+    while ((x = RANDOM % 4, y = RANDOM % 4)); do
+        ((g[$x,$y])) || break
     done
 
     g[$x,$y]=2
