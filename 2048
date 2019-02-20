@@ -75,14 +75,12 @@ declare -A g t
 # init array
 for i in {0..3},{0..3}; do
     g[$i]=0
-done
+done; new
 
 # init functions
 for key in h j k l; do
     template "$key"
 done
-
-new
 
 while display; read -rsn 1 key; do
     # save current state
