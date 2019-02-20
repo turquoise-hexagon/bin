@@ -17,17 +17,17 @@ new() {
     ((x = RANDOM % 4, y = RANDOM % 4))
 
     # generate a brand new cell
-    while ((g[$x $y])); do
+    while ((g[$x,$y])); do
         ((x = RANDOM % 4, y = RANDOM % 4))
     done
 
-    g[$x $y]=2
+    g[$x,$y]=2
 }
 
 check() {
     c=
 
-    for i in {0..3}\ {0..3}; do
+    for i in {0..3},{0..3}; do
         ((g[$i] && c++, g[$i] == 2048)) && exit
     done
 
@@ -38,18 +38,18 @@ display() {
     # print in place
     printf '\e[H'
 
-    for i in {0..3}\ {0..3}; do
+    for i in {0..3},{0..3}; do
         color "${g[$i]}"
-        ((${i#?} == 3)) && echo
+        ((${i#??} == 3)) && echo
     done
 }
 
 template() {
     case $1 in
-        h) a='0..3'; b='k = j + 1; k <  4; k++'; c='$i $j'; d='$i $k';;
-        j) a='3..0'; b='k = j - 1; k >= 0; k--'; c='$j $i'; d='$k $i';;
-        k) a='0..3'; b='k = j + 1; k <  4; k++'; c='$j $i'; d='$k $i';;
-        l) a='3..0'; b='k = j - 1; k >= 0; k--'; c='$i $j'; d='$i $k';;
+        h) a='0..3'; b='k = j + 1; k <  4; k++'; c='$i,$j'; d='$i,$k';;
+        j) a='3..0'; b='k = j - 1; k >= 0; k--'; c='$j,$i'; d='$k,$i';;
+        k) a='0..3'; b='k = j + 1; k <  4; k++'; c='$j,$i'; d='$k,$i';;
+        l) a='3..0'; b='k = j - 1; k >= 0; k--'; c='$i,$j'; d='$i,$k';;
     esac
 
     eval "
@@ -77,7 +77,7 @@ printf '\e[2J'
 declare -A g t
 
 # fill the array
-for i in {0..3}\ {0..3}; do
+for i in {0..3},{0..3}; do
     ((g[$i] = 0))
 done
 
