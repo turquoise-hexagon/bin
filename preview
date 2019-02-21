@@ -19,7 +19,7 @@ shopt -s checkwinsize; (:;:)
 # e\[?25h : show the cursor
 printf '\e[2J\e[H\e[?25l'
 
-trap "printf '\e[?25h'" INT EXIT
+trap "printf '\e[?25h'" EXIT
 
 # center vertically
 mapfile a < "$1"

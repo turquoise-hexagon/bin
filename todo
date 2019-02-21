@@ -7,7 +7,7 @@ todo=~/.todo
 
 pri()
     while read -r a; do
-        printf '%-5s%s\n' $((c++)) "$a"
+        printf '%-5s%s\n' "$((c++))" "$a"
     done < "$todo"
 
 del()
