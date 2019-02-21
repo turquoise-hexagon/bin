@@ -7,27 +7,28 @@ if [[ ! -f $1 ]]; then
     exit 1
 fi
 
+_() {
+    printf '%*s\n' "$(((${#2} + C) / 2))" "$2"
+}
+
 # enable sleep builtin
 enable -f /usr/lib/bash/sleep sleep
 
-# get terminal window size
+# get terminal size
 shopt -s checkwinsize; (:;:)
+C=$COLUMNS
+L=$LINES
 
 # \e[H    : print in 0, 0
 # \e[2J   : clear the screen
 # \e[?25l : hide the cursor
-# e\[?25h : show the cursor
+# \e[?25h : show the cursor
 printf '\e[2J\e[H\e[?25l'
+trap 'printf \\e[?25h' EXIT
 
-trap "printf '\e[?25h'" EXIT
-
-# center vertically
-mapfile a < "$1"
-for ((; i < (LINES - ${#a[@]}) / 2; i++)) { echo; }
-
-# center horizontally
-while read -r l; do
-    printf '%*s\n' "$(((${#l} + COLUMNS) / 2))" "$l"
-done < "$1"
+# center text
+mapfile -t f < "$1"
+printf '\e[%sH' "$(((L - ${#f[@]}) / 2))"
+mapfile -tC _ -c1 < "$1"
 
 sleep 10
