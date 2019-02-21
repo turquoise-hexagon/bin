@@ -19,11 +19,10 @@ shopt -s checkwinsize; (:;:)
 C=$COLUMNS
 L=$LINES
 
-# \e[H    : print in 0, 0
 # \e[2J   : clear the screen
 # \e[?25l : hide the cursor
 # \e[?25h : show the cursor
-printf '\e[2J\e[H\e[?25l'
+printf '\e[2J\e[?25l'
 trap 'printf \\e[?25h' EXIT
 
 # center text
