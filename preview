@@ -26,7 +26,7 @@ printf '\e[2J\e[?25l'
 trap 'printf \\e[?25h' EXIT
 
 # center text
-mapfile -t f < "$1"
+mapfile f < "$1"
 printf '\e[%sH' "$(((L - ${#f[@]}) / 2))"
 mapfile -tC _ -c1 < "$1"
 
