@@ -8,7 +8,7 @@ if [[ ! -f $1 ]]; then
 fi
 
 _() {
-    printf '%*s\n' "$(((${#2} + C) / 2))" "$2"
+    printf '%*s\n' $(((${#2} + C) / 2)) "$2"
 }
 
 # enable sleep builtin
@@ -27,7 +27,7 @@ trap 'printf \\e[?25h' EXIT
 
 # center text
 mapfile f < "$1"
-printf '\e[%sH' "$(((L - ${#f[@]}) / 2))"
+printf '\e[%sH' $(((L - ${#f[@]}) / 2))
 mapfile -tC _ -c1 < "$1"
 
 sleep 10
