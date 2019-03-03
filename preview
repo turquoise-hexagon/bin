@@ -1,33 +1,25 @@
 #!/usr/bin/env bash
 #
-# center text and hide ui
+# center text and hide the ui
 
-if [[ ! -f $1 ]]; then
-    echo 'usage : preview [file]'
-    exit 1
-fi
-
-_() {
-    printf '%*s\n' $(((${#2} + C) / 2)) "$2"
-}
-
-# enable sleep builtin
-enable -f /usr/lib/bash/sleep sleep
+# \e[?25h : show the cursor
+trap $'printf \e[?25h' EXIT
 
 # get terminal size
 shopt -s checkwinsize; (:;:)
-C=$COLUMNS
-L=$LINES
+((C = COLUMNS, L = LINES))
+
+_() {
+    printf -v s '%s%*s' "$s" $(((${#2} + C) / 2)) "$2"
+}
+
+# center text
+mapfile -C _ -c1 f < "$1" || {
+    echo 'usage : preview [file]'
+    exit 1
+}
 
 # \e[2J   : clear the screen
 # \e[?25l : hide the cursor
-# \e[?25h : show the cursor
-printf '\e[2J\e[?25l'
-trap 'printf \\e[?25h' EXIT
-
-# center text
-mapfile f < "$1"
-printf '\e[%sH' $(((L - ${#f[@]}) / 2))
-mapfile -tC _ -c1 < "$1"
-
-sleep 10
+# \e[<n>H : print in the middle
+read -rst 10 -p $'\e[2J\e[?25l\e['"$(((L - ${#f[@]}) / 2))H$s"
