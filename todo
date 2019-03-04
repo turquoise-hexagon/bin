@@ -3,7 +3,7 @@
 # todo script
 
 task=$2
-todo=~/.todo
+todo=~/.cache/todo
 
 pri()
     while read -r a; do
