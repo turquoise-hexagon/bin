@@ -2,10 +2,8 @@
 #
 # a e s t h e t i c s
 
-var=${*:-`< /dev/stdin`}
-
-for ((; i < ${#var}; i++)) {
-    echo -n "${var:i:1} "
-}
+while IFS= read -rn 1 char; do
+    echo -n "$char "
+done <<< ${*-`< /dev/stdin`}
 
 echo
