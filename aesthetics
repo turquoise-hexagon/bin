@@ -4,6 +4,6 @@
 
 while IFS= read -rn 1 char; do
     echo -n "$char "
-done <<< ${*-`< /dev/stdin`}
+done <<< ${*:-`< /dev/stdin`}
 
 echo
