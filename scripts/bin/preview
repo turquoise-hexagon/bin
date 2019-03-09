@@ -6,7 +6,7 @@
 trap $'printf \e[?25h' EXIT
 
 # get terminal size
-shopt -s checkwinsize; (:;:)
+shopt -s checkwinsize; (:)
 ((C = COLUMNS, L = LINES))
 
 _() {
@@ -14,7 +14,7 @@ _() {
 }
 
 # center text
-mapfile -C _ -c1 f < "$1" || {
+mapfile -C _ -c1 < "$1" || {
     echo 'usage : preview [file]'
     exit 1
 }
