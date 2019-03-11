@@ -14,7 +14,7 @@ _() {
 }
 
 # center text
-mapfile -C _ -c1 < "$1" || {
+mapfile -C _ -c1 f < "$1" || {
     echo 'usage : preview [file]'
     exit 1
 }
