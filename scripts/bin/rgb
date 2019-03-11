@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+#
+# hex -> rgb
+
+hex=${*:-`< /dev/null`}
+hex=${hex#\#} # strip '#'
+
+if ((${#hex} != 6)); then
+    echo 'usage : rgb [hex]'
+    exit 1
+fi
+
+for ((; i < ${#hex}; i += 2)) {
+    out+=($((16#${hex:i:2})))
+} \
+    2> /dev/null
+
+echo "${out[@]:-null}"
