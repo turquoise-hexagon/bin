@@ -2,24 +2,23 @@
 #
 # center text and hide ui
 
-# \e[?25h : show the cursor
+# \e[?25h : show cursor
 trap $'printf \e[?25h' EXIT
 
 # get terminal size
 shopt -s checkwinsize; (:)
-((C = COLUMNS, L = LINES))
 
-_() {
-    printf -v s '%s%*s' "$s" $(((${#2} + C) / 2)) "$2"
+fun() {
+    printf -v string '%s%*s' "$string" $(((COLUMNS + ${#2}) / 2)) "$2"
 }
 
 # center text
-mapfile -C _ -c1 f < "$1" || {
-    echo 'usage : preview [file]'
+mapfile -C fun -c1 file < "$1" || {
+    echo 'usage : center [file]'
     exit 1
 }
 
-# \e[2J   : clear the screen
-# \e[?25l : hide the cursor
-# \e[<n>H : print in the middle
-read -rst 10 -p $'\e[2J\e[?25l\e['"$(((L - ${#f[@]}) / 2))H$s"
+# \e[?25l : hide cursor
+# \e[2J   : clear screen
+# \e[<n>  : print in <n>
+read -rst 10 -p $'\e[2J\e[?25l\e['"$(((LINES - ${#file[@]}) / 2))H$string"
