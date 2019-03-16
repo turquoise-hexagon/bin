@@ -2,20 +2,18 @@
 #
 # rename pictures based on exifs
 
-_() {
-    var=$(exif -mt DateTime "$1") || exit 1
-
-    # format date
-    var=${var//:/-}
-    var=${var// /_}.${1##*.}
-
-    mv   "$1"  "$var"
-    echo "$1 -> $var"
-}
-
 if ((! $#)); then
     echo 'usage : pics [file...]'
     exit 1
 fi
 
-for file in "$@"; { _ "$file"; }
+for file; {
+    var=$(exif -mt DateTime "$file") || exit 1
+
+    # format date
+    var=${var//:/-}
+    var=${var// /_}.${file##*.}
+
+    mv   "$file"  "$var"
+    echo "$file -> $var"
+}
