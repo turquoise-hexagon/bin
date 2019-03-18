@@ -21,4 +21,4 @@ mapfile -C fun -c1 file < "$1" || {
 # \e[?25l : hide cursor
 # \e[2J   : clear screen
 # \e[<n>  : print in <n>
-read -rst 10 -p $'\e[2J\e[?25l\e['"$(((LINES - ${#file[@]}) / 2))H$string"
+read -rst 10 -p $'\e[2J\e[?25l\e['"$(((LINES - ${#file[@]}) / 2 + 1))H$string"

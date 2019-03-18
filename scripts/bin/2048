@@ -69,7 +69,8 @@ template() {
     }"
 }
 
-printf '\e[2J'
+printf '\e[2J\e[?25l'
+trap $'printf \e[?25h' EXIT
 
 declare -A g t
 
