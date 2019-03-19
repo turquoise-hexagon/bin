@@ -10,10 +10,14 @@ fi
 for file; {
     var=$(exif -mt DateTime "$file") || exit 1
 
+    # format extension
+    ext=${file##*.}
+    ext=${ext,,}
+
     # format date
     var=${var//:/-}
-    var=${var// /_}.${file##*.}
+    var=${var// /_}
 
-    mv   "$file"  "$var"
-    echo "$file -> $var"
+    mv   "$file"  "$var.$ext"
+    echo "$file -> $var.$ext"
 }
