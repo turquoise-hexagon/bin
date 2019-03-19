@@ -5,7 +5,7 @@
 for file; do
     if [ -f "$file" ]; then
         case $file in
-            *.tar.bz2|*.tar.gz|*.tar.xz|*.tar|tgz|*.xz) tar xvf "$file";;
+            *.tar.bz2|*.tar.gz|*.tar.xz|*.tar|*.tgz|*.xz) tar xvf "$file";;
             *.gz)  gunzip "$file";;
             *.zip) unzip  "$file";;
             *) echo "'$1' cannot be extracted via extract"
