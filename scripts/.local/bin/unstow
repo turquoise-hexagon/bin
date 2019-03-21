@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+# unstow
+
+for i in *; do
+    test -d "$i" && stow -D "$i" -t ~
+done
