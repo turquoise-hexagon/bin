@@ -3,7 +3,7 @@
 # bdf -> pcf
 
 if ! test "$1"; then
-    echo 'usage : pcf [file...'
+    echo 'usage : pcf [file...]'
 fi
 
 for i; do
