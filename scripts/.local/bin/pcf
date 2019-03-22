@@ -2,6 +2,10 @@
 #
 # bdf -> pcf
 
-for font in *.bdf; do
-    bdftopcf "$font" > "${font%\.*}.pcf"
+if ! test "$1"; then
+    echo 'usage : pcf [file...'
+fi
+
+for i; do
+    bdftopcf "$i" > "${i%.*}.pcf"
 done
