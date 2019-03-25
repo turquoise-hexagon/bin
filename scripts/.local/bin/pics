@@ -2,13 +2,15 @@
 #
 # rename pictures based on exifs
 
-if ((! $#)); then
+die() {
     echo 'usage : pics [file...]'
     exit 1
-fi
+}
 
-for file; {
-    var=$(exif -mt DateTime "$file") || exit 1
+(($#)) || die
+
+for file; do
+    var=$(exif -mt DateTime "$file") || die
 
     # format extension
     ext=${file##*.}
@@ -18,6 +20,11 @@ for file; {
     var=${var//:/-}
     var=${var// /_}
 
-    mv   "$file"  "$var.$ext"
-    echo "$file -> $var.$ext"
-}
+    # format name
+    name=$var.$ext
+
+    [[ $name != "$file" ]] && {
+        mv   "$file"  "$name"
+        echo "$file -> $name"
+    }
+done
