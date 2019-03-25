@@ -3,7 +3,7 @@
 # extract common archives
 
 die() {
-    echo 'usage : extract [file]'
+    echo 'usage : extract [file...]'
     exit 1
 }
 
