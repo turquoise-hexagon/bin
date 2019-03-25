@@ -2,15 +2,20 @@
 #
 # extract common archives
 
+die() {
+    echo 'usage : extract [file]'
+    exit 1
+}
+
+test "$1" || die
+
 for file; do
-    if [ -f "$file" ]; then
-        case $file in
-            *.tar.bz2|*.tar.gz|*.tar.xz|*.tar|*.tgz|*.xz) tar xvf "$file";;
-            *.gz)  gunzip "$file";;
-            *.zip) unzip  "$file";;
-            *) echo "'$1' cannot be extracted via extract"
-        esac
-    else
-        echo 'usage : extract [file]'
-    fi
+    test -f "$file" || die
+
+    case $file in
+        *.tar.bz2|*.tar.gz|*.tar.xz|*.tar|*.tgz|*.xz) tar xvf "$file";;
+        *.zip) unzip "$file";;
+        *.gz) gunzip "$file";;
+        *) echo "'$1' cannot be extracted via extract"
+    esac
 done
