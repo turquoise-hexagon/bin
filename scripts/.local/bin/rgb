@@ -5,14 +5,17 @@
 hex=${*:-`< /dev/null`}
 hex=${hex#\#} # strip '#'
 
-if ((${#hex} != 6)); then
-    echo 'usage : rgb [hex]'
-    exit 1
-fi
-
 for ((; i < ${#hex}; i += 2)) {
     out+=($((16#${hex:i:2})))
 } \
     2> /dev/null
 
-echo "${out[@]:-null}"
+((
+    ${#hex} != 6 ||
+    ${#out[@]} != 3
+)) && {
+    echo 'usage : rgb [hex]'
+    exit 1
+}
+
+echo "${out[@]}"
