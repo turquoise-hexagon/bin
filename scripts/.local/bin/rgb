@@ -2,7 +2,7 @@
 #
 # hex -> rgb
 
-hex=${*:-`< /dev/null`}
+hex=${*:-`< /dev/stdin`}
 hex=${hex#\#} # strip '#'
 
 for ((; i < ${#hex}; i += 2)) {
