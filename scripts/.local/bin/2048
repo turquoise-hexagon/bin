@@ -29,7 +29,7 @@ display() {
         c=
 
         for a in {4,10}{0..5}; do
-            ((c == ${g[$i]})) && # get the right color
+            ((c == g[$i])) && # get the right color
                 printf '\e[%sm%4s\e[m' "$a" "${g[$i]}"
 
             ((c = c ? c * 2 : 2))
