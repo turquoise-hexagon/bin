@@ -6,9 +6,7 @@ while read -r pkg; do
     # don't list personal / core ports
     while read -r line; do
         [[ $line =~ ^Path ]] && {
-            IFS=/ read -ra array <<< $line
-
-            [[ ${array[3]} =~ turquoise|core ]] || echo "$pkg"
+            [[ $line =~ .*turquoise|core ]] || echo "$pkg"
 
             break
         }
