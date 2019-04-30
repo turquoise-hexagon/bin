@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#
+# find missing dependencies
+
+while read -r pkg; do
+    for dep in $(prt-get quickdep "$pkg"); do
+        prt-get isinst "$dep" > /dev/null || echo "$dep"
+    done
+done < <(prt-get listinst)
