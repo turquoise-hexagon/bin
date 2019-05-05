@@ -3,7 +3,7 @@
 # run command at a specified time
 
 if (($# < 2)); then
-    echo 'usage : at [time] [command]'
+    echo 'usage : at [time] [command]' >&2
     exit 1
 fi
 

@@ -3,7 +3,7 @@
 # extract common archives
 
 die() {
-    echo 'usage : extract [file...]'
+    echo 'usage : extract [file...]' >&2
     exit 1
 }
 
@@ -16,6 +16,6 @@ for file; do
         *.tar.bz2|*.tar.gz|*.tar.xz|*.tar|*.tgz|*.xz) tar xvf "$file";;
         *.zip) unzip "$file";;
         *.gz) gunzip "$file";;
-        *) echo "'$1' cannot be extracted via extract"
+        *) echo "'$1' cannot be extracted via extract" >&2
     esac
 done

@@ -3,7 +3,7 @@
 # get orphaned packages
 
 if ((! $#)); then
-    echo 'usage : orphans [package]'
+    echo 'usage : orphans [package]' >&2
     exit 1
 fi
 

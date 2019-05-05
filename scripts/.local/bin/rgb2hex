@@ -5,11 +5,11 @@
 rgb=${*:-`< /dev/stdin`}
 
 for c in $rgb; {
-    out+=$(printf %02X "$c")
+    out+=$(printf '%02X' "$c")
 }
 
 ((${#out} != 6)) && {
-    echo 'usage : hex [red] [green] [blue]'
+    echo 'usage : hex [red] [green] [blue]' >&2
     exit 1
 }
 
