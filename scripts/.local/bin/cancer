@@ -7,7 +7,7 @@ str=${*:-`< /dev/stdin`}
 for ((i = 0; i < ${#str}; i++)) {
     tmp=${str:i:1}
 
-    ((RANDOM & 2)) && tmp=${tmp^}
+    ((RANDOM & 2)) && tmp=${tmp^} || tmp=${tmp,}
 
     echo -n "$tmp"
 }
