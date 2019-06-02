@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#
+# CanceR
+
+str=${*:-`< /dev/stdin`}
+
+for ((i = 0; i < ${#str}; i++)) {
+    tmp=${str:i:1}
+
+    ((RANDOM & 2)) && tmp=${tmp^}
+
+    echo -n "$tmp"
+}
+
+echo
