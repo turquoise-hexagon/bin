@@ -2,14 +2,10 @@
 #
 # CanceR
 
-str=${*:-`< /dev/stdin`}
-
-for ((i = 0; i < ${#str}; i++)) {
-    tmp=${str:i:1}
-
-    ((RANDOM & 2)) && tmp=${tmp^} || tmp=${tmp,}
+while IFS= read -rn1 char; do
+    ((RANDOM & 2)) && tmp=${char^} || tmp=${char,}
 
     echo -n "$tmp"
-}
+done <<< ${*:-`< /dev/stdin`}
 
 echo
