@@ -2,8 +2,10 @@
 #
 # a e s t h e t i c s
 
-while IFS= read -rn 1 char; do
-    echo -n "$char "
-done <<< ${*:-`< /dev/stdin`}
+while read -r line; do
+    while IFS= read -rn1 char; do
+        echo -n "$char "
+    done <<< $line
 
-echo
+    echo
+done <<< ${*-`< /dev/stdin`}

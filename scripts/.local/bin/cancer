@@ -2,10 +2,10 @@
 #
 # CanceR
 
-while IFS= read -rn1 char; do
-    ((RANDOM & 2)) && tmp=${char^} || tmp=${char,}
+while read -r line; do
+    while IFS= read -rn1 char; do
+        ((RANDOM & 2)) && echo -n "${char^}" || echo -n "${char,}"
+    done <<< $line
 
-    echo -n "$tmp"
+    echo
 done <<< ${*:-`< /dev/stdin`}
-
-echo
