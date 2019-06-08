@@ -5,7 +5,7 @@
 hex=${*:-`< /dev/stdin`}
 hex=${hex#\#} # strip '#'
 
-for ((i = 0; i < ${#hex}; i += 2)) {
+for ((; i < ${#hex}; i += 2)) {
     rgb+=($((16#${hex:i:2})))
 }
 
