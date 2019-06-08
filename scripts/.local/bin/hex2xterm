@@ -3,7 +3,7 @@
 # hex -> 256
 
 hex=${*:-`< /dev/stdin`}
-hex=${hex#\#}
+hex=${hex#\#} # strip '#'
 
 for ((i = 0; i < ${#hex}; i += 2)) {
     rgb+=($((16#${hex:i:2})))
@@ -21,6 +21,7 @@ fun() {
     tmp=($2)
     var=
 
+    # get difference
     for i in {0..2}; {
         ((
             var += tmp[i] > rgb[i] ?
@@ -291,6 +292,7 @@ mapfile -C fun -tc1 << EOF
 238 238 238
 EOF
 
+# get closest value
 for i in "${!array[@]}"; do
     printf '%s\n' "${array[i]}"
     break
