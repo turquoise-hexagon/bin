@@ -293,7 +293,7 @@ mapfile -C fun -tc1 << EOF
 EOF
 
 # get closest value
-for i in "${!array[@]}"; do
+for i in "${!array[@]}"; {
     printf '%s\n' "${array[i]}"
     break
-done
+}
