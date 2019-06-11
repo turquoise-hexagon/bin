@@ -4,10 +4,12 @@
 
 declare -A installed aliases
 
-# alternatives
+# store aliases
 while IFS=': ' read -r alias orig; do
     aliases[$alias]=$orig
 done < /var/lib/pkg/prt-get.aliases
+
+list=$(prt-get listinst)
 
 # store installed packages
 while read -r; do
@@ -20,13 +22,13 @@ while read -r; do
     }
 
     installed[$REPLY]=1
-done < <(prt-get listinst)
+done <<< $list
 
 # find missing dependencies
 while read -r; do
     for dependency in $(prt-get quickdep "$REPLY"); {
         ((installed[$dependency])) || echo "$dependency"
     } &
-done < <(prt-get listinst)
+done <<< $list
 
 wait
