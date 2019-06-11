@@ -2,10 +2,10 @@
 #
 # get orphaned packages
 
-if ((! $#)); then
+(($#)) || {
     echo 'usage : orphans [package]' >&2
     exit 1
-fi
+}
 
 # get dependencies and store them in an array
 read -ra dependencies <<< $(prt-get quickdep "$1")

@@ -2,9 +2,8 @@
 #
 # bdf -> pcf
 
-if ! test "$1"; then
+test "$1" ||
     echo 'usage : pcf [file...]' >&2
-fi
 
 for i; do
     bdftopcf "$i" > "${i%.*}.pcf"

@@ -26,5 +26,7 @@ done < <(prt-get listinst)
 while read -r; do
     for dependency in $(prt-get quickdep "$REPLY"); {
         ((installed[$dependency])) || echo "$dependency"
-    }
+    } &
 done < <(prt-get listinst)
+
+wait

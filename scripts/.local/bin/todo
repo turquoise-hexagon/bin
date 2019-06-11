@@ -15,9 +15,9 @@ del()
         ((task != c++)) && echo "$a"
     done < "$todo"
 
-if ((! $#)); then
+(($#)) || {
     pri; exit
-fi
+}
 
 case $1 in
     add) echo "${@:2}" >> "$todo";;

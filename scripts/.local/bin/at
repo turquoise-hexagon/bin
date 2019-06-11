@@ -2,10 +2,10 @@
 #
 # run command at a specified time
 
-if (($# < 2)); then
+(($# < 2)) && {
     echo 'usage : at [time] [command]' >&2
     exit 1
-fi
+}
 
 # enable sleep builtin
 enable -f /usr/lib/bash/sleep sleep
