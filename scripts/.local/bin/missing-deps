@@ -2,8 +2,29 @@
 #
 # find missing dependencies
 
-while read -r pkg; do
-    for dep in $(prt-get quickdep "$pkg"); do
-        prt-get isinst "$dep" > /dev/null || echo "$dep"
-    done
+declare -A installed aliases
+
+# alternatives
+while IFS=': ' read -r alias orig; do
+    aliases[$alias]=$orig
+done < /var/lib/pkg/prt-get.aliases
+
+# store installed packages
+while read -r; do
+    for pkg in "${!aliases[@]}}"; {
+        [[ $REPLY == "$pkg" ]] && {
+            installed[${aliases[$pkg]}]=1
+
+            break
+        }
+    }
+
+    installed[$REPLY]=1
+done < <(prt-get listinst)
+
+# find missing dependencies
+while read -r; do
+    for dep in $(prt-get quickdep "$REPLY"); {
+        ((installed[$dep])) || echo "$dep"
+    }
 done < <(prt-get listinst)
