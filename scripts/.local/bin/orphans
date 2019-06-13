@@ -7,16 +7,15 @@
     exit 1
 }
 
-# get dependencies and store them in an array
-read -ra dependencies <<< $(prt-get quickdep "$1")
+dependencies=$(prt-get quickdep "$1")
 
-for dependency in "${dependencies[@]}"; do
+for dependency in $dependencies; {
     # check if all dependents are dependencies
     while read -r dependent; do
-        for package in "${dependencies[@]}"; do
+        for package in $dependencies; {
             [[ $dependent == "$package" ]] && break
-        done || continue 2
+        } || continue 2
     done < <(prt-get dependent --recursive "$dependency")
 
     echo "$dependency"
-done
+}
