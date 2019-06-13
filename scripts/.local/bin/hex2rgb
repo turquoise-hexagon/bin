@@ -10,12 +10,9 @@ for ((; i < ${#hex}; i += 2)) {
 } \
     2> /dev/null
 
-((
-    ${#hex} != 6 ||
-    ${#out[@]} != 3
-)) && {
+((${#hex} != 6 || ${#out[@]} != 3)) && {
     echo "usage : ${0##*/} [hex]" >&2
     exit 1
 }
 
-echo "${out[@]}"
+echo "${out[*]}"
