@@ -3,7 +3,7 @@
 # get orphaned packages
 
 (($#)) || {
-    echo 'usage : orphans [package]' >&2
+    echo "usage : ${0##*/} [package]" >&2
     exit 1
 }
 

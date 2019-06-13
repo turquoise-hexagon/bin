@@ -14,7 +14,7 @@ for ((; i < ${#hex}; i += 2)) {
     ${#hex} != 6 ||
     ${#out[@]} != 3
 )) && {
-    echo 'usage : rgb [hex]' >&2
+    echo "usage : ${0##*/} [hex]" >&2
     exit 1
 }
 

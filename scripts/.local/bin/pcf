@@ -3,7 +3,7 @@
 # bdf -> pcf
 
 test "$1" ||
-    echo 'usage : pcf [file...]' >&2
+    echo "usage : ${0##*/} [file...]" >&2
 
 for i; do
     bdftopcf "$i" > "${i%.*}.pcf"

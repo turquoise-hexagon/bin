@@ -14,7 +14,7 @@ fun() {
 
 # center text
 mapfile -C fun -c1 file < "$1" || {
-    echo 'usage : center [file]' >&2
+    echo "usage : ${0##*/} [file]" >&2
     exit 1
 }
 

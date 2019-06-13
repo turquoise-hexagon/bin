@@ -9,7 +9,7 @@ for c in $rgb; {
 }
 
 ((${#out} != 6)) && {
-    echo 'usage : hex [red] [green] [blue]' >&2
+    echo "usage : ${0##*/} [red] [green] [blue]" >&2
     exit 1
 }
 

@@ -14,7 +14,7 @@ for ((; i < ${#hex}; i += 2)) {
     ${#hex} != 6 ||
     ${#rgb[@]} != 3
 )) && {
-    printf 'usage : hex2xterm [hex]\n' >&2
+    printf "usage : ${0##*/} [hex]\n" >&2
     exit 1
 }
 

@@ -22,5 +22,5 @@ del()
 case $1 in
     add) echo "${@:2}" >> "$todo";;
     del) echo "$(del)"  > "$todo";;
-    *) echo 'usage : todo <add|del> [text|n]' >&2
+    *) echo "usage : ${0##*/} <add|del> [text|n]" >&2
 esac
