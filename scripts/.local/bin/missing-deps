@@ -13,13 +13,8 @@ list=$(prt-get listinst)
 
 # store installed packages
 while read -r; do
-    for package in "${!aliases[@]}}"; {
-        [[ $REPLY == "$package" ]] && {
-            installed[${aliases[$package]}]=1
-
-            break
-        }
-    }
+    [[ ${aliases[$REPLY]} ]] &&
+        installed[${aliases[$REPLY]}]=1
 
     installed[$REPLY]=1
 done <<< $list
