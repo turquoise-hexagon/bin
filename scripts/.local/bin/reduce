@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#
+# reduce
+
+a=${@: -1}
+
+while read -r x; do
+    a=$("${@:1:$# - 1}" "$a" "$x")
+done
+
+echo "$a"
