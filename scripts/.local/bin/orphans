@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# get orphaned packages
+# list packages that would be orphaned
 
 (($#)) || {
     echo "usage : ${0##*/} [package]" >&2

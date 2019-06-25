@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+#
+# list ports that are missing from the repos
+
+while read -r pkg; do
+    {
+        while read -r line; do
+            [[ $line =~ ^Path.*$ ]] && {
+                IFS=: read -ra array <<< $line
+
+                path=${array[1]}/$pkg
+                path=${path// }
+
+                break
+            }
+        done < <(prt-get info "$pkg" 2> /dev/null)
+
+        [[ -d $path ]] || echo "$pkg"
+    } &
+done < <(prt-get listinst)
+
+wait

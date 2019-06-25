@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+#
+# list packages that could be removed
+
+# ignored repos
+ignore=(turquoise core)
+
+while read -r pkg; do
+    while read -r line; do
+        [[ $line =~ ^Path.*$ ]] && {
+            for i in "${ignore[@]}"; {
+                [[ $i == "${line##*/}" ]] && continue 2
+            }
+
+            echo "$pkg"
+
+            break
+        }
+    done < <(prt-get info "$pkg") &
+done < <(prt-get listorphans)
+
+wait

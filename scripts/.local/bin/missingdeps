@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# find missing dependencies
+# list missing dependencies
 
 declare -A installed aliases
 
