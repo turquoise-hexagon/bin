@@ -7,7 +7,10 @@ cur=$(date +%F_%H-%M-%S)
 
 mkdir -p "$dir" || exit 1
 
-slop -f '%w %h %x %y' | {
+hacksaw                               \
+    -f  '%w %h %x %y'                 \
+    -ns "$(bspc config border_width)" \
+    -c  "$(bspc config focused_border_color)" | {
     read -r w h x y
 
     ffmpeg -loglevel 16 \
