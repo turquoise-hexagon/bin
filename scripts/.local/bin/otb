@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+# bdf -> otb
+
+test "$1" ||
+    echo "usage : ${0##*/} [file...]" >&2
+
+for i; do
+    fonttosfnt -o "${i%.*}.otb"
+done
