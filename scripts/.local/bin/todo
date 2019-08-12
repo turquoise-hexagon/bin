@@ -5,22 +5,17 @@
 task=$2
 todo=~/.local/share/todo
 
-pri()
-    while read -r a; do
-        printf '%-5s%s\n' $((c++)) "$a"
-    done < "$todo"
-
-del()
-    while read -r a; do
-        ((task != c++)) && echo "$a"
-    done < "$todo"
-
-(($#)) || {
-    pri; exit
-}
-
 case $1 in
+    '')
+        _() { printf '%-5s%s' "$1" "$2"; }
+        mapfile -C _ -c1 < "$todo"
+        ;;
+    del)
+        _() { ((task != $1)) && printf '%s' "$2"; }
+        var=$(mapfile -C _ -c1 < "$todo")
+
+        [[ $var ]] && echo "$var" > "$todo" || > "$todo"
+        ;;
     add) echo "${@:2}" >> "$todo";;
-    del) echo "$(del)"  > "$todo";;
-    *) echo "usage : ${0##*/} <add|del> [text|n]" >&2
+    *)   echo "usage : ${0##*/} <add|del> [text|n]" >&2
 esac
