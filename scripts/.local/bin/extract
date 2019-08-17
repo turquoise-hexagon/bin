@@ -16,6 +16,6 @@ for file; do
         *.tar.bz2|*.tar.gz|*.tar.xz|*.tar|*.tgz|*.xz) tar xvf "$file";;
         *.zip) unzip "$file";;
         *.gz) gunzip "$file";;
-        *) echo "'$1' cannot be extracted via extract" >&2
+        *) echo "'$1' cannot be extracted via ${0##*/}" >&2
     esac
 done
