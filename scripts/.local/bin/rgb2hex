@@ -5,7 +5,7 @@
 rgb=${*:-`< /dev/stdin`}
 
 for c in $rgb; {
-    out+=$(printf '%02X' "$c")
+    printf -v out '%s%02X' "$out" "$c"
 }
 
 ((${#out} != 6)) && {
