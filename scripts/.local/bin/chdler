@@ -11,7 +11,7 @@ declare -A array
 
 while read -rd \< line; do
     [[ $line =~ ('//is2.4chan.org/'[^\"]+) ]] &&
-        array[http:${BASH_REMATCH[1]}]=1
+        array[https:${BASH_REMATCH[1]}]=1
 done < <(curl -s "$1")
 
 for file in "${!array[@]}"; {
