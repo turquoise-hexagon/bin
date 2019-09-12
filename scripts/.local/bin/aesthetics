@@ -8,4 +8,4 @@ while read -r line; do
     done <<< $line
 
     echo
-done <<< ${*-`< /dev/stdin`}
+done <<< ${*:-`< /dev/stdin`}
