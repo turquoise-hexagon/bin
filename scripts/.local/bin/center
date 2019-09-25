@@ -6,10 +6,10 @@
 trap $'printf \e[?25h' EXIT
 
 # get terminal size
-shopt -s checkwinsize; (:)
+IFS='[;' read -p $'\e[s\e[999;999H\e[6n\e[u' -dR -rs _ x y
 
 fun() {
-    printf -v string '%s%*s' "$string" $(((COLUMNS + ${#2}) / 2)) "$2"
+    printf -v string '%s%*s' "$string" $(((y + ${#2}) / 2)) "$2"
 }
 
 # center text
@@ -21,4 +21,4 @@ fun() {
 # \e[2J   : clear screen
 # \e[?25l : hide cursor
 # \e[<n>H : print in <n>
-read -rst 10 -p $'\e[2J\e[?25l\e['"$(((LINES - ${#file[@]}) / 2 + 1))H$string"
+read -rst 10 -p $'\e[2J\e[?25l\e['"$(((x - ${#file[@]}) / 2 + 1))H$string"
