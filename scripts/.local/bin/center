@@ -5,7 +5,10 @@
 # \e[?25h : show cursor
 trap $'printf \e[?25h' EXIT
 
-# get terminal size
+# \e[s   : save position
+# \e[$nH : move to $n
+# \e[6n  : query position
+# \e[u   :  restore position
 IFS='[;' read -p $'\e[s\e[999;999H\e[6n\e[u' -dR -rs _ x y
 
 fun() {
@@ -20,5 +23,5 @@ fun() {
 
 # \e[2J   : clear screen
 # \e[?25l : hide cursor
-# \e[<n>H : print in <n>
+# \e[$nH  : move to $n
 read -rst 10 -p $'\e[2J\e[?25l\e['"$(((x - ${#file[@]}) / 2 + 1))H$string"
