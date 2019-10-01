@@ -9,12 +9,14 @@ while read -r line; do
         var=${BASH_REMATCH[2]}
 
         case $key in
-            *fore*)   : 10;;
-            *back*)   : 11;;
-            *cursor*) : 12;;
+            *foreground)  : 10;;
+            *background)  : 11;;
+            *cursorColor) : 12;;
             *color*)
                 [[ $key =~ ([0-9]+) ]] &&
                     : "4;${BASH_REMATCH[1]}"
+                ;;
+            *) continue
         esac
 
         sequences+=("$_;$var")
