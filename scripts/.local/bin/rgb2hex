@@ -2,9 +2,7 @@
 #
 # rgb -> hex
 
-rgb=${*:-`< /dev/stdin`}
-
-for c in $rgb; {
+for c in ${*:-`< /dev/stdin`}; {
     printf -v out '%s%02X' "$out" "$c"
 }
 
