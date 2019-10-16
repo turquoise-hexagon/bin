@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+#
+# display memory usage
+
+while IFS=':k ' read -r key val _; do
+    case $key in
+        MemTotal)
+            ((
+                used += val,
+                full =  val
+            ))
+        ;;
+        Shmem)
+            ((
+                used += val
+            ))
+        ;;
+        MemFree|Buffers|Cached|SReclaimable)
+            ((
+                used -= val
+            ))
+    esac
+done < /proc/meminfo
+
+echo "$((used / 1024))Mi / $((full / 1024))Mi"
