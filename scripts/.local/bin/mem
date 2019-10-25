@@ -11,14 +11,10 @@ while IFS=':k ' read -r key val _; do
             ))
         ;;
         Shmem)
-            ((
-                used += val
-            ))
+            ((used += val))
         ;;
         MemFree|Buffers|Cached|SReclaimable)
-            ((
-                used -= val
-            ))
+            ((used -= val))
     esac
 done < /proc/meminfo
 
