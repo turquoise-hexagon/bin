@@ -2,7 +2,7 @@
 #
 # record with ffmpeg and slop
 
-dir=~/pics/records
+dir=~/medias/videos/records
 cur=$(date +%F_%H-%M-%S)
 
 mkdir -p "$dir" || exit 1
