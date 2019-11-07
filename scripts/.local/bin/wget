@@ -1,0 +1,5 @@
+#!/bin/sh
+#
+# wget
+
+command -p wget --hsts-file=~/.cache/wget "$@"
