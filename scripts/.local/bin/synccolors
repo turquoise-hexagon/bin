@@ -18,13 +18,11 @@ while read -r line; do
             *) continue
         esac
 
-        sequences+=("$_;$var")
+        sequences+=("\e]$_;$var\007")
     }
 done < <(xrdb -query)
 
 # send to terminals
 for term in /dev/pts/[0-9]*; {
-    for sequence in "${sequences[@]}"; {
-        printf '%b' "\e]$sequence\007" > "$term"
-    }
+    printf '%b' "${sequences[@]}" > "$term"
 }
