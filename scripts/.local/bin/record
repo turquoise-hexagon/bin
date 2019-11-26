@@ -5,15 +5,18 @@
 dir=~/medias/videos/records
 cur=$(date +%F_%H-%M-%S)
 
-mkdir -p "$dir" || exit 1
+mkdir -p "$dir"
 
 hacksaw                               \
-    -f  '%w %h %x %y'                 \
     -ns "$(bspc config border_width)" \
     -c  "$(bspc config focused_border_color)" | {
-    read -r w h x y
+    IFS='+x' read -r w h x y
 
-    ffmpeg -loglevel 16  \
+    w=$((w + w % 2))
+    h=$((h + h % 2))
+
+    ffmpeg               \
+        -v 16            \
         -r 30            \
         -f x11grab       \
         -s "${w}x${h}"   \
