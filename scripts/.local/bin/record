@@ -13,13 +13,14 @@ hacksaw                               \
     -c  "$(bspc config focused_border_color)" | {
     read -r w h x y
 
-    ffmpeg -loglevel 16 \
-        -r 30           \
-        -f x11grab      \
-        -s "${w}x${h}"  \
-        -i ":0.0+$x,$y" \
-        -preset slow    \
-        -c:v h264       \
-        -crf 20         \
+    ffmpeg -loglevel 16  \
+        -r 30            \
+        -f x11grab       \
+        -s "${w}x${h}"   \
+        -i ":0.0+$x,$y"  \
+        -preset slow     \
+        -c:v h264        \
+        -pix_fmt yuv420p \
+        -crf 20          \
         "$dir/$cur.mp4"
 }
