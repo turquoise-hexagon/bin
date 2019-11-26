@@ -10,7 +10,7 @@ mkdir -p "$dir"
 hacksaw                               \
     -ns "$(bspc config border_width)" \
     -c  "$(bspc config focused_border_color)" | {
-    IFS='+x' read -r w h x y
+    IFS=+x read -r w h x y
 
     w=$((w + w % 2))
     h=$((h + h % 2))
