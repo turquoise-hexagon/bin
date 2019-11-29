@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# setup venv
+
+dir=.venv
+var=$dir/bin/activate
+
+# init
+mkdir          "$dir"
+python -m venv "$dir"
+echo ". $var" > .envrc
+
+# run
+direnv allow
+. "$var"
+
+pip -qqq install -U pip
