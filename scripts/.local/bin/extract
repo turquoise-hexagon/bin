@@ -14,8 +14,9 @@ for file; do
 
     case $file in
         *.tar.bz2|*.tar.gz|*.tar.xz|*.tar|*.tgz|*.xz) tar xvf "$file";;
-        *.zip) unzip "$file";;
-        *.gz) gunzip "$file";;
+        *.zip)   unzip "$file";;
+        *.gz)   gunzip "$file";;
+        *.rar) unrar e "$file";;
         *) echo "'$1' cannot be extracted via ${0##*/}" >&2
     esac
 done

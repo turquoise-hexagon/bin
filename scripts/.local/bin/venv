@@ -6,12 +6,12 @@ dir=.venv
 var=$dir/bin/activate
 
 # init
-mkdir          "$dir"
-python -m venv "$dir"
+mkdir           "$dir"
+python3 -m venv "$dir"
 echo ". $var" > .envrc
 
 # run
 direnv allow
 . "$var"
 
-pip -qqq install -U pip
+pip3 -qqq install -U pip
