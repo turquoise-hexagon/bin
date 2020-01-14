@@ -22,9 +22,9 @@ fun() {
     # get difference
     for i in {0..2}; {
         ((
-            var += tmp[i] > rgb[i] ?
-                   tmp[i] - rgb[i] :
-                 - tmp[i] + rgb[i]
+            var +=  tmp[i] > rgb[i]
+                ?   tmp[i] - rgb[i]
+                : - tmp[i] + rgb[i]
         ))
     }
 
