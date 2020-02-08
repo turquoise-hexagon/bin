@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+# sudo
+
+echo "sudo $*"
+
+command -p sudo "$@"
