@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+#
+# connect alsa ports
+
+die() {
+    echo "$1" >&2
+    exit 1
+}
+
+name_1='Arturia MiniLab mkII'
+name_2='FLUID Synth'
+
+while read -r line; do
+    # get ports corresponding to names
+    for var in name_{1,2}; {
+        [[
+            $line =~ ${!var} &&
+            $line =~ client\ ([0-9]+)
+        ]] && {
+            printf -v "${var/name/port}" "${BASH_REMATCH[1]}"
+
+            break
+        }
+    }
+done < <(aconnect -l)
+
+# test if ports have been obtained
+for var in port_{1,2}; {
+    [[ ${!var} ]] || {
+        tmp=${var/port/name}
+
+        die "error : '${!tmp}' isn't connected"
+    }
+}
+
+# finally connect
+aconnect "$port_1" "$port_2" 2> /dev/null ||
+    die "error : connection is already active"
