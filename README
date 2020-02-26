@@ -1,3 +1,4 @@
 various code bits for backup and sharing purpose
 
-managed with gnu stow
+usage :
+$ ./deploy
