@@ -2,3 +2,6 @@ various code bits for backup and sharing purpose
 
 usage :
 $ ./deploy
+
+depends on :
+* stow
