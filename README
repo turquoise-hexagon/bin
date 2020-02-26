@@ -1,7 +1,11 @@
-various code bits for backup and sharing purpose
+bin
+====
+    various code bits for backup and sharing purpose
 
-usage :
-$ ./deploy
+usage
+-----
+    $ ./deploy
 
-depends on :
-* stow
+depends on
+----------
+    * stow
