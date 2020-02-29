@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# connect alsa ports
+# midikb - connect two alsa ports
 
 die() {
     echo "$1" >&2

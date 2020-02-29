@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# sudo
+# sudo - small sudo wrapper
 
 echo "sudo $*"
 

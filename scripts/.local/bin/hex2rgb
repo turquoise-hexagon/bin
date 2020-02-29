@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# hex -> rgb
+# hex2rgb - convert hexadecimal to rgb
 
 hex=${*:-`< /dev/stdin`}
 hex=${hex#\#} # strip '#'

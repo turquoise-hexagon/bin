@@ -1,4 +1,6 @@
 #!/bin/sh
+#
+# bgcc - run gcc with some flags
 
 gcc               \
     -pedantic     \

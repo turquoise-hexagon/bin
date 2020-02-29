@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+# mpdrefresh - refresh mpd playlist
+
+{
+    mpc update
+    mpc clear
+    mpc ls | mpc add
+} \
+    > /dev/null

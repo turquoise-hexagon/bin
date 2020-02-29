@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# CanceR
+# cancer - cAnCEr
 
 while read -r line; do
     while IFS= read -rn1 char; do

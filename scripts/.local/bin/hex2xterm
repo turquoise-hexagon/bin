@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# hex -> 256
+# hex2xterm - convert hexadecimal to xterm color
 
 hex=${*:-`< /dev/stdin`}
 hex=${hex#\#} # strip '#'

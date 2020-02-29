@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# rgb -> hex
+# rgb2hex - convert rgb to hexadecimal
 
 for c in ${*:-`< /dev/stdin`}; {
     printf -v out '%s%02X' "$out" "$c"

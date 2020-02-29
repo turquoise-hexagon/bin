@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# sync colorschemes
+# synccolors - sync colors between terminals
 
 # build a list of escape sequences
 while read -r line; do

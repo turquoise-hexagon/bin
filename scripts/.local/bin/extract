@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# extract common archives
+# extract - extract common archive formats
 
 die() {
     echo "usage : ${0##*/} [file...]" >&2

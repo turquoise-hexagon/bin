@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# fonts - refresh fonts
+# fontsrefresh - refresh fonts
 
 dir=~/.local/share/fonts
 

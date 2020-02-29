@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# rename pictures based on exifs
+# pics - rename pictures based on exifs
 
 die() {
     echo "usage : ${0##*/} [file...]" >&2

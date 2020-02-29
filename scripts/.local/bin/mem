@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# display memory usage
+# mem - display memory usage
 
 while IFS=':k ' read -r key val _; do
     case $key in

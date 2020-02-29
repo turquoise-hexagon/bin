@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# center text and hide ui
+# center - center text and hide ui
 
 # \e[?25h : show cursor
 trap $'printf \e[?25h' EXIT

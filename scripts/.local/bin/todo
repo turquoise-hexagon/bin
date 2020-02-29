@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# todo script
+# todo - simple todo script
 
 task=$2
 todo=~/.local/share/todo

@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# record with ffmpeg and slop
+# record - record an area of the screen
 
 dir=~/medias/videos/records
 cur=$(date +%F_%H-%M-%S)

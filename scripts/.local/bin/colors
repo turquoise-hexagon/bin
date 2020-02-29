@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# display colorscheme
+# colors - display colorscheme
 
 _() { echo -e "\e[$1"{0..7}"m  \e[m"; }
 

@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# unstow
+# unstow - unlink a stow package / directory
 
 if test "$1"; then
     cd "$1" || exit

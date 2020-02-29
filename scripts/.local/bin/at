@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# run command at a specified time
+# at - run command at specified time
 
 (($# < 2)) && {
     echo "usage : ${0##*/} [time] [command]" >&2

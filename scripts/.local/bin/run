@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 #
-# run a command x times
+# run - run a command x times
 
 for ((; i++ < $1;)) { "${@:2}"; }

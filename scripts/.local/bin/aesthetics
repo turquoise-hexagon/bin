@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# a e s t h e t i c s
+# aesthetics - a e s t h e t i c s
 
 while read -r line; do
     while IFS= read -rn1 char; do

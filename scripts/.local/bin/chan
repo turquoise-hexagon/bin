@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# download 4chan thread medias
+# chan - download medias from 4chan threads
 
 (($#)) || {
     echo "usage : ${0##*/} [thread]" >&2

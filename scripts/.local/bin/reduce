@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# reduce
+# reduce - reduce-like script for bash
 
 a=${@: -1}
 
