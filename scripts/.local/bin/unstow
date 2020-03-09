@@ -6,6 +6,4 @@ if test "$1"; then
     cd "$1" || exit
 fi
 
-for i in */; do
-    stow -D "$i" -t ~
-done
+stow -t ~ -D */

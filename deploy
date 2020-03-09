@@ -6,6 +6,4 @@ type stow > /dev/null 2>&1 || {
     exit 1
 }
 
-for i in */; do
-    stow "$i" -t ~
-done
+stow -t ~ */
