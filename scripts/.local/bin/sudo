@@ -2,6 +2,6 @@
 #
 # sudo - small sudo wrapper
 
-echo "sudo $*"
+echo "sudo $*" >&2
 
 command -p sudo "$@"
