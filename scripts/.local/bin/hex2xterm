@@ -28,7 +28,7 @@ fun() {
         ))
     }
 
-    array[var]=$((c++))
+    array[var]=$((++c))
 }
 
 mapfile -C fun -tc1 << EOF
