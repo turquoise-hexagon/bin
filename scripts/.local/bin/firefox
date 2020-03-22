@@ -2,4 +2,4 @@
 #
 # firefox - small firefox wrapper
 
-apulse "$(command -vp firefox)"
+apulse "$(command -vp firefox)" "$@"
