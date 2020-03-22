@@ -1,9 +1,9 @@
 #!/bin/sh
+#
+# colorpicker - small colorpicker wrapper
 
-cmd=$(command -vp colorpicker)
-
-stdbuf -oL "$cmd" |
+stdbuf -oL "$(command -vp colorpicker)" |
     while IFS=', ' read -r r g b hex; do
-        printf '%s\n\033[48;2;%s;%s;%sm       \033[m\n' \
-            "$hex" "$r" "$g" "$b"
+        printf '\033[48;2;%s;%s;%sm%s\033[m\n' \
+            "$r" "$g" "$b" "$hex"
     done
