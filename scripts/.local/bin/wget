@@ -2,4 +2,4 @@
 #
 # wget - small wget wrapper
 
-command -p wget --hsts-file=~/.cache/wget "$@"
+exec "$(command -vp wget)" --hsts-file=~/.cache/wget "$@"

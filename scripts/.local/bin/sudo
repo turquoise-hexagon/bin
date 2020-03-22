@@ -4,4 +4,4 @@
 
 echo "sudo $*" >&2
 
-command -p sudo "$@"
+exec "$(command -vp sudo)" "$@"
