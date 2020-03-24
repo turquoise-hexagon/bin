@@ -2,10 +2,14 @@
 #
 # bgcc - run gcc with some flags
 
-gcc               \
-    -pedantic     \
-    -Wall         \
-    -Wextra       \
-    -static       \
-    -march=native \
-    -Ofast "$@"
+CFLAGS="
+-pedantic
+-Wall
+-Wextra
+-static
+-march=native
+-Ofast $CFLAGS"
+
+set -x
+
+exec gcc $CFLAGS "$@"
