@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-#
-# map - map-like script for bash
-
-while read -r x; do
-    "$@" "$x"
-done

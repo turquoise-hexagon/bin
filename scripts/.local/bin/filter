@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-#
-# filter - filter-like script for bash
-
-while read -r x; do
-    "$@" "$x" > /dev/null && echo "$x"
-done
