@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# synccolors - sync colors between terminals
+# synccolors - sync xres colors from stdin between terminals
 
 # build a list of escape sequences
 while read -r line; do
@@ -20,7 +20,7 @@ while read -r line; do
 
         sequences+=("\e]$_;$var\007")
     }
-done < <(xrdb -query)
+done
 
 # send to terminals
 for term in /dev/pts/[0-9]*; {
