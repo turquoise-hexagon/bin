@@ -1,9 +1,0 @@
-#!/bin/sh
-#
-# picker - colorpicker wrapper with preview
-
-stdbuf -oL colorpicker |
-    while IFS=', ' read -r r g b hex; do
-        printf '\033[48;2;%s;%s;%sm%s\033[m\n' \
-            "$r" "$g" "$b" "$hex"
-    done
