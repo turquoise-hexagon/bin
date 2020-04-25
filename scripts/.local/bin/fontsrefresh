@@ -2,8 +2,8 @@
 #
 # fontsrefresh - refresh fonts
 
-dir=~/.local/share/fonts
+DIR=~/.local/share/fonts
 
-mkfontdir "$dir"
-xset +fp "$dir"
+mkfontdir "$DIR"
+xset +fp "$DIR"
 xset fp rehash
