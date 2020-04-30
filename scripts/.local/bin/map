@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#
+# map - map-like script
+
+while read -r i; do
+    "$@" "$i"
+done

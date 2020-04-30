@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#
+# filter - filter-like script
+
+while read -r i; do
+    "$@" "$i" > /dev/null && echo "$i"
+done
