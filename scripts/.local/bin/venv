@@ -1,0 +1,14 @@
+#!/bin/sh
+#
+# venv - python venv & direnv
+
+DIR=.venv
+
+# init
+mkdir -p "$DIR"
+python3 -m venv "$DIR"
+echo ". $DIR/bin/activate" > .envrc
+
+# set
+direnv allow
+pip3 -qqq install -U pip

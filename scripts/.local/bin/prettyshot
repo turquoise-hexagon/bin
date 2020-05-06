@@ -5,6 +5,8 @@
 PADDING=20
 DIR=~/medias/pics/scrots
 
+mkdir -p "$DIR"
+
 id=$(slw) &&
     wattr xywhb "$id" | {
         read -r x y w h b
