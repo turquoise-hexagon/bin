@@ -1,20 +1,21 @@
 #!/bin/sh
-#
-# archive - create tarball from file
 
 die() {
-    echo "${1:-usage : ${0##*/} [file]}" >&2
+    echo "${1:-usage : ${0##*/} [file] ...}" >&2
     exit 1
 }
 
-[ -e "$1" ] && {
-    tar=${1%%.*}.tar.gz
+tar=${1%%.*}.tar.gz
 
-    [ -e "$tar" ] &&
-        die "'$tar' already exists"
-
-    tar czvf "$tar" "$1"
-
-    :
-} ||
+[ "$1" ] ||
     die
+
+[ -e "$tar" ] &&
+    die "error : '$tar' already exists"
+
+for file; do
+    [ -e "$file" ] ||
+        die "error : '$file' isn't a valid file"
+done
+
+tar czvf "$tar" "$@"
