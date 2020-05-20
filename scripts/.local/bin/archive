@@ -5,7 +5,8 @@ die() {
     exit 1
 }
 
-tar=${1%%.*}.tar.gz
+tar=${1%/}
+tar=${tar%%.*}.tar.gz
 
 [ "$1" ] ||
     die
