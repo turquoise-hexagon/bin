@@ -11,7 +11,7 @@ mkdir -p "$DIR"
 IFS=+x; set -- $(
     hacksaw                     \
         -ns "$(_ border_width)" \
-        -c "$(_ focused_border_color)"
+        -c "$(_ focused_border_color)" 2> /dev/null
 )
 
 test $# -eq 0 && exit
