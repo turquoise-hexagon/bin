@@ -2,6 +2,8 @@
 #
 # bgcc - run gcc with some flags
 
+CC=${CC:-gcc}
+
 CFLAGS="
 -pedantic
 -Wall
@@ -12,4 +14,4 @@ CFLAGS="
 
 set -x
 
-exec gcc $CFLAGS "$@"
+exec $CC $CFLAGS "$@"
