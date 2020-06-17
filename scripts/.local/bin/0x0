@@ -1,0 +1,8 @@
+#!/bin/sh
+#
+# 0x0 - upload to 0x0.st
+
+[ -f "$1" ] && op=cat
+
+"${op:-echo}" "${1:-`cat -`}" |
+    curl -F file='@-' 'https://0x0.st'
