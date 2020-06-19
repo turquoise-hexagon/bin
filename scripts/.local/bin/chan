@@ -10,7 +10,7 @@
 while read -rd \< line; do
     [[ $line =~ 'a href="'('//is2.4chan.org/'[^\"]+) ]] &&
         array+=("https:${BASH_REMATCH[1]}")
-done < <(curl -s "$1")
+done <<< $(curl -s "$1")
 
 for file in "${array[@]}"; {
     wget "$file" &> /dev/null || {

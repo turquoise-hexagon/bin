@@ -22,7 +22,7 @@ while read -r line; do
             break
         }
     }
-done < <(aconnect -l)
+done <<< $(aconnect -l)
 
 # test if ports have been obtained
 for var in port_{1,2}; {
