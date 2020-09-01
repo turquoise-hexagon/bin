@@ -21,14 +21,14 @@ h=$(($2 + $2 % 2))
 
 cur=$(date +%F_%H-%M-%S)
 
-ffmpeg               \
-    -v 16            \
-    -r 30            \
-    -f x11grab       \
-    -s "${w}x${h}"   \
-    -i ":0.0+$3,$4"  \
-    -preset slow     \
-    -c:v h264        \
-    -pix_fmt yuv420p \
-    -crf 20          \
+ffmpeg                     \
+    -v 16                  \
+    -r 30                  \
+    -f x11grab             \
+    -s "${w}x${h}"         \
+    -i "$DISPLAY.0+$3,$4"  \
+    -preset slow           \
+    -c:v h264              \
+    -pix_fmt yuv420p       \
+    -crf 20                \
     "$DIR/$cur.mp4"
