@@ -2,6 +2,6 @@
 #
 # filter - filter-like script
 
-while read -r i; do
+while IFS= read -r i; do
     "$@" "$i" > /dev/null && echo "$i"
 done

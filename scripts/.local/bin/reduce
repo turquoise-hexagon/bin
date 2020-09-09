@@ -4,7 +4,7 @@
 
 a=${@: -1}
 
-while read -r i; do
+while IFS= read -r i; do
     a=$("${@:1:$# - 1}" "$a" "$i")
 done
 
