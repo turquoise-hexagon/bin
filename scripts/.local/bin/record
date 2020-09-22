@@ -1,25 +1,42 @@
 #!/bin/sh
 #
-# record - record an area of the screen
-
-_() bspc config "$@"
+# record - take a recording of a preselected area
 
 DIR=~/medias/videos/records
 
-mkdir -p "$DIR"
+_() bspc config "$@"
 
-IFS=+x; set -- $(
-    hacksaw                     \
-        -ns "$(_ border_width)" \
-        -c "$(_ focused_border_color)" 2> /dev/null
-)
+tmp=$IFS
+
+# get preselected area
+IFS=+x
+
+set -f
+set -- $(
+    hacksaw                            \
+        -s "$(_         border_width)" \
+        -c "$(_ focused_border_color)" \
+        -n 2> /dev/null)
+set +f
+
+IFS=$tmp
 
 test $# -eq 0 && exit
 
+# avoid accidental small records
+[ $(($1 < 10 && $2 < 10)) -eq 1 ] && {
+    set -f
+    set -- $(wattr whxy "$(lsw -r)")
+    set +f
+}
+
+# adjust geometry
 w=$(($1 + $1 % 2))
 h=$(($2 + $2 % 2))
 
-cur=$(date +%F_%H-%M-%S)
+name=$(date +%F_%H-%M-%S).mp4
+
+mkdir -p "$DIR"
 
 ffmpeg                     \
     -v 16                  \
@@ -31,4 +48,4 @@ ffmpeg                     \
     -c:v h264              \
     -pix_fmt yuv420p       \
     -crf 20                \
-    "$DIR/$cur.mp4"
+    "$DIR/$name"
