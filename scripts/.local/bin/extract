@@ -3,14 +3,14 @@
 # extract - extract common archive formats
 
 die() {
-    die "${1:-usage : ${0##*/} [file...]}" >&2
+    printf '%s\n' "${1:-usage : ${0##*/} <file> ...}" >&2
     exit 1
 }
 
-test "$1" || die
+[ "$1" ] || die
 
 for file; do
-    test -f "$file" || die
+    [ -f "$file" ] || die
 
     case $file in
         *.tar.bz2|*.tar.gz|*.tar.xz|*.tar|*.tgz|*.xz) tar xvf "$file";;

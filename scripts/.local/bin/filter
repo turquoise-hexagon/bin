@@ -3,5 +3,6 @@
 # filter - filter-like script
 
 while IFS= read -r i; do
-    "$@" "$i" > /dev/null && echo "$i"
+    "$@" "$i" > /dev/null &&
+        printf '%s\n' "$i"
 done

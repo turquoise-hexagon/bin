@@ -3,7 +3,7 @@
 # pics - rename pictures based on exifs
 
 die() {
-    echo "usage : ${0##*/} [file...]" >&2
+    printf '%s\n' "${1:-usage : ${0##*/} <file> ...}" >&2
     exit 1
 }
 
@@ -24,7 +24,7 @@ for file; do
     name=$var.$ext
 
     [[ $name != "$file" ]] && {
-        mv   "$file"  "$name"
-        echo "$file -> $name"
+        mv                  "$file" "$name"
+        printf '%s -> %s\n' "$file" "$name"
     }
 done

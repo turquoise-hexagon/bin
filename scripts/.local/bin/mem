@@ -18,4 +18,6 @@ while IFS=':k ' read -r key val _; do
     esac
 done < /proc/meminfo
 
-echo "$((used / 1024))Mi / $((full / 1024))Mi"
+printf '%sMi / %sMi\n' \
+    $((used / 1024))   \
+    $((full / 1024))

@@ -2,6 +2,6 @@
 #
 # sudo - small sudo wrapper
 
-echo "sudo $*" >&2
+printf '%s %s\n' "${0##*/}" "$*"
 
 exec "$(command -vp sudo)" "$@"

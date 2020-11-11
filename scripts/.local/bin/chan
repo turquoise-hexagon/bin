@@ -2,10 +2,12 @@
 #
 # chan - download medias from 4chan threads
 
-(($#)) || {
-    echo "usage : ${0##*/} [thread]" >&2
+die() {
+    printf '%s\n' "${1:-usage : ${0##*/} <thread>}" >&2
     exit 1
 }
+
+(($# == 1)) || die
 
 while read -rd \< line; do
     [[ $line =~ 'a href="'('//is2.4chan.org/'[^\"]+) ]] &&
@@ -13,10 +15,8 @@ while read -rd \< line; do
 done <<< $(curl -s "$1")
 
 for file in "${array[@]}"; {
-    wget "$file" &> /dev/null || {
-        echo "error : downloading '${file##*/}' failed" >&2
-        exit 1
-    }
+    wget "$file" &> /dev/null ||
+        die "error : downloading '${file##*/}' failed"
 
-    echo "downloaded '${file##*/}'"
+    printf "downloaded '%s'\n" "${file##*/}"
 }

@@ -5,6 +5,8 @@
 PADDING=20
 DIR=~/medias/pics/scrots
 
+_() : $(($@)) # maths
+
 mkdir -p "$DIR"
 
 id=$(slw) &&
@@ -12,10 +14,10 @@ id=$(slw) &&
         read -r x y w h b
 
         # get dimensions & coordinates
-        w=$((w + PADDING * 2))
-        h=$((h + PADDING * 2))
-        x=$((x - PADDING + b))
-        y=$((y - PADDING + b))
+        _ w = w + PADDING * 2
+        _ h = h + PADDING * 2
+        _ x = x - PADDING + b
+        _ y = y - PADDING + b
 
         cur=$(date +%F_%H-%M-%S)
 

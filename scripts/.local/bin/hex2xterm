@@ -2,6 +2,11 @@
 #
 # hex2xterm - convert hexadecimal to xterm color
 
+die() {
+    printf '%s\n' "${1:-usage : ${0##*/} <hex>}" >&2
+    exit 1
+}
+
 hex=${*:-`< /dev/stdin`}
 hex=${hex#\#} # strip '#'
 
@@ -10,10 +15,8 @@ for ((; i < ${#hex}; i += 2)) {
 } \
     2> /dev/null
 
-((${#hex} != 6 || ${#rgb[@]} != 3)) && {
-    echo "usage : ${0##*/} [hex]" >&2
-    exit 1
-}
+((${#hex} == 6 && ${#rgb[@]} == 3)) ||
+    die
 
 fun() {
     tmp=($2)

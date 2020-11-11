@@ -1,17 +1,21 @@
 #!/usr/bin/env bash
 #
-# at - run command at specified time
+# at - run command at a specified time
 
-(($# < 2)) && {
-    echo "usage : ${0##*/} [time] [command]" >&2
+BUILTINS_DIR=/usr/lib/bash
+
+die() {
+    printf '%s\n' "${1:-usage : ${0##*/} <time> <command>}" >&2
     exit 1
 }
 
-# enable sleep builtin
-enable -f /usr/lib/bash/sleep sleep
+(($# < 2)) &&
+    die
+
+enable -f "$DIR/sleep" sleep
 
 {
-    until [[ $(printf '%(%R)T') == "$1" ]]; do
+    while [[ $(printf '%(%R)T') != "$1" ]]; do
         sleep 10
     done
 

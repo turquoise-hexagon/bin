@@ -3,7 +3,7 @@
 # midikb - connect two alsa ports
 
 die() {
-    echo "$1" >&2
+    printf '%s\n' "$1" >&2
     exit 1
 }
 

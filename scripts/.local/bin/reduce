@@ -8,4 +8,4 @@ while IFS= read -r i; do
     a=$("${@:1:$# - 1}" "$a" "$i")
 done
 
-echo "$a"
+printf '%s\n' "$a"
