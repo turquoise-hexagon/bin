@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# aesthetics - a e s t h e t i c s  
+# aesthetics - a e s t h e t i c s
 
 while IFS= read -r line; do
     unset str
