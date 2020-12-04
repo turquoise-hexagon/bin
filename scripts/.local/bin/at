@@ -12,7 +12,7 @@ die() {
 (($# < 2)) &&
     die
 
-enable -f "$DIR/sleep" sleep
+enable -f "$BUILTINS_DIR/sleep" sleep
 
 {
     while [[ $(printf '%(%R)T') != "$1" ]]; do
