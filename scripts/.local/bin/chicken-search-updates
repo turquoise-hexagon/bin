@@ -21,9 +21,20 @@ for egg in "${!eggs[@]}"; {
 
     max=$versions
 
-    for version in "${versions[@]:1}"; {
-        [[ $version > "$max" ]] &&
-            max=$version
+    for cur in "${versions[@]:1}"; {
+        IFS=.- read -ra fields_cur <<< ${cur//[^0-9.-]}
+        IFS=.- read -ra fields_max <<< ${max//[^0-9.-]}
+
+        for ((i = 0; i < "${#fields_cur[@]}"; ++i)) {
+            field_cur=${fields_cur[i]}
+            field_max=${fields_max[i]}
+
+            field_cur=$((${field_cur#*0}))
+            field_max=$((${field_max#*0}))
+
+            ((field_cur > field_max)) &&
+                max=$cur
+        }
     }
 
     [[ ${eggs[$egg]} != "$max" ]] &&

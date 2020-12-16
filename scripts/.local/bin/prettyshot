@@ -14,10 +14,10 @@ id=$(slw) &&
         read -r x y w h b
 
         # get dimensions & coordinates
-        _ w = w + PADDING * 2
-        _ h = h + PADDING * 2
-        _ x = x - PADDING + b
-        _ y = y - PADDING + b
+        _ 'w = w + PADDING * 2'
+        _ 'h = h + PADDING * 2'
+        _ 'x = x - PADDING + b'
+        _ 'y = y - PADDING + b'
 
         cur=$(date +%F_%H-%M-%S)
 
