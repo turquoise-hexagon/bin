@@ -5,9 +5,9 @@
 while IFS= read -r line; do
     unset str
 
-    while IFS= read -n 1 -r char; do
+    while IFS= read -r -n 1 char; do
         str+="$char "
     done <<< $line
 
     printf '%s\n' "$str"
-done <<< ${*:-`< /dev/stdin`}
+done

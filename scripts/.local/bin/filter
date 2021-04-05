@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-#
-# filter - filter-like script
-
-while IFS= read -r i; do
-    "$@" "$i" > /dev/null &&
-        printf '%s\n' "$i"
-done
