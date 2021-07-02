@@ -1,44 +1,45 @@
 #!/usr/bin/env bash
 #
-# chicken-search-updates - search for updates for chicken eggs
+# chicken-search-updates - search for updates for chicken packages
 
-declare -A eggs
+declare -A current_versions
 
-while read -r line; do
-    [[ $line =~ ^(.*)' '.*' version: '(.*)$ ]] &&
-        eggs[${BASH_REMATCH[1]}]=${BASH_REMATCH[2]}
-done <<< $(chicken-status)
+while IFS=' ' read -r name _ _ version; do
+    current_versions[$name]=$version
+done < <(chicken-status)
 
+# update database
 chicken-install -u > /dev/null
 
-for egg in "${!eggs[@]}"; {
-    IFS=: read -r _ tmp <<< $(chicken-install -list-versions "$egg")
-
-    [[ $tmp =~ error ]] &&
+while IFS=: read -r name versions_string; do
+    [[ $versions_string =~ error ]] &&
         continue
 
-    read -ra versions <<< $tmp
+    IFS=' ' read -r -a versions <<< $versions_string
 
     max=$versions
 
-    for cur in "${versions[@]:1}"; {
-        IFS=.- read -ra fields_cur <<< ${cur//[^0-9.-]}
-        IFS=.- read -ra fields_max <<< ${max//[^0-9.-]}
+    for var in "${versions[@]}"; {
+        IFS=. read -r -a max_fields <<< $max
+        IFS=. read -r -a var_fields <<< $var
 
-        for ((i = 0; i < "${#fields_cur[@]}"; ++i)) {
-            field_cur=${fields_cur[i]}
-            field_max=${fields_max[i]}
+        for ((i = 0; i < ${#var_fields[@]}; ++i)) {
+            max_field=${max_fields[i]}
+            var_field=${var_fields[i]}
 
-            field_cur=$((${field_cur#*0}))
-            field_max=$((${field_max#*0}))
+            [[ $var_field -lt $max_field ]] &&
+                break
 
-            ((field_cur > field_max)) &&
-                max=$cur
+            [[ $var_field -gt $max_field ]] && {
+                max=$var
+
+                break
+            }
         }
     }
 
-    [[ ${eggs[$egg]} != "$max" ]] &&
-        printf '%s -> %s\n' "$egg" "$max"
-}
+    [[ ${current_versions[$name]} != "$max" ]] &&
+        printf '%s -> %s\n' "$name" "$max"
+done < <(chicken-install -list-versions "${!current_versions[@]}")
 
 :
