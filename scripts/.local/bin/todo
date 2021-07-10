@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+# todo - vim todo-list
+
+readonly FILE=~/.local/share/todo
+
+vim "$FILE"
