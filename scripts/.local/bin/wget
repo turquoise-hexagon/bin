@@ -2,4 +2,6 @@
 #
 # wget - small wget wrapper
 
-exec "$(command -vp wget)" --hsts-file=~/.cache/wget "$@"
+readonly FILE=~/.cache/wget
+
+exec "$(command -v -p wget)" --hsts-file="$FILE" "$@"
