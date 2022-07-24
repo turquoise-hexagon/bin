@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# cancer - CanCEr 
+# cancer - CanCEr
 
 while IFS= read -r line; do
     unset str
