@@ -1,23 +1,32 @@
-#!/usr/bin/env bash
+#!/bin/sh
 #
-# at - run command at a specified time
-
-BUILTINS_DIR=/usr/lib/bash
+# at - run comand at a specified time
 
 die() {
-    printf '%s\n' "${1:-usage : ${0##*/} <time> <command>}" >&2
+    printf '%s\n' "${1:-usage : ${0##*/} <date> <command> ...}" >&2
+
     exit 1
 }
 
-(($# < 2)) &&
+if [ $(($# < 2)) -eq 1 ]; then
     die
+fi
 
-enable -f "$BUILTINS_DIR/sleep" sleep
+# get target time
+if ! target=$(date -d "$1" +%s) 2> /dev/null; then
+    die "error : '$1' is not a valid date format"
+fi
+
+offset=$((target - `date +%s`))
+
+if [ $((offset < 0)) -eq 1 ]; then
+    die "error : '$1' is in the past"
+fi
 
 {
-    while [[ $(printf '%(%R)T') != "$1" ]]; do
-        sleep 10
-    done
+    # sleep until then
+    sleep "$offset"
 
-    "${@:2}"
+    shift
+    "$@"
 } &

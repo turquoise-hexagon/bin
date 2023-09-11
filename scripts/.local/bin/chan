@@ -3,20 +3,21 @@
 # chan - download medias from 4chan threads
 
 die() {
-    printf '%s\n' "${1:-usage : ${0##*/} <thread>}" >&2
+    printf '%s\n' "${1:-usage : ${0##*/} <url>}" >&2
+
     exit 1
 }
 
-(($# == 1)) || die
+if ((! $#)); then
+    die
+fi
 
-while read -rd \< line; do
-    [[ $line =~ 'a href="'('//is2.4chan.org/'[^\"]+) ]] &&
-        array+=("https:${BASH_REMATCH[1]}")
+urls=()
+
+while IFS= read -r -d '>' line; do
+    if [[ $line =~ ^'File: <a href="'([^\"]+) ]]; then
+        urls+=("https:${BASH_REMATCH[1]}")
+    fi
 done <<< $(curl -s "$1")
 
-for file in "${array[@]}"; {
-    wget "$file" &> /dev/null ||
-        die "error : downloading '${file##*/}' failed"
-
-    printf "downloaded '%s'\n" "${file##*/}"
-}
+wget "${urls[@]}"

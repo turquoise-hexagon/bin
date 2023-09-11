@@ -2,7 +2,7 @@
 #
 # fontsrefresh - refresh fonts
 
-DIR=~/.local/share/fonts
+readonly DIR=~/.local/share/fonts
 
 mkfontdir "$DIR"
 xset +fp "$DIR"
