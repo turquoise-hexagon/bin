@@ -3,7 +3,7 @@
 # chan - download medias from 4chan threads
 
 die() {
-    printf '%s\n' "${1:-usage : ${0##*/} <url>}" >&2
+    printf '%s\n' "${1:-usage : ${0##*/} <url> ...}" >&2
 
     exit 1
 }
@@ -14,10 +14,12 @@ fi
 
 urls=()
 
-while IFS= read -r -d '>' line; do
-    if [[ $line =~ ^'File: <a href="'([^\"]+) ]]; then
-        urls+=("https:${BASH_REMATCH[1]}")
-    fi
-done <<< $(curl -s "$1")
+for arg; do
+    while IFS= read -r -d '>' line; do
+        if [[ $line =~ ^'File: <a href="'([^\"]+) ]]; then
+            urls+=("https:${BASH_REMATCH[1]}")
+        fi
+    done <<< $(curl -s "$arg")
+done
 
-wget "${urls[@]}"
+wget -nv "${urls[@]}"
