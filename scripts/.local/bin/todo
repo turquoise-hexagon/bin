@@ -4,4 +4,4 @@
 
 readonly FILE=~/.local/share/todo
 
-vim "$FILE"
+nvim "$FILE"

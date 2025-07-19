@@ -2,7 +2,7 @@
 #
 # record - take a recording of a preselected area
 
-DIR=~/medias/videos/records
+DIR=~/medias/vids/records
 
 _() bspc config "$@"
 
