@@ -2,7 +2,7 @@
 #
 # record - take a recording of a preselected area
 
-DIR=~/medias/vids/records
+DIR=~/media/vids/records
 
 _() bspc config "$@"
 
@@ -45,7 +45,7 @@ ffmpeg                     \
     -s "${w}x${h}"         \
     -i "$DISPLAY.0+$3,$4"  \
     -preset slow           \
-    -c:v h264              \
+    -c:v libx264           \
+    -crf 18                \
     -pix_fmt yuv420p       \
-    -crf 20                \
     "$DIR/$name"

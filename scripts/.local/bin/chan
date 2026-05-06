@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# chan - download medias from 4chan threads
+# chan - download media from 4chan threads
 
 die() {
     printf '%s\n' "${1:-usage : ${0##*/} <url> ...}" >&2

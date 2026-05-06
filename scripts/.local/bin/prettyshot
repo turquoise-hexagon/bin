@@ -3,7 +3,7 @@
 # prettyshot - take a screenshot of a window with some padding
 
 PADDING=20
-DIR=~/medias/pics/scrots
+DIR=~/media/pics/scrots
 
 _() : $(($@)) # maths
 
